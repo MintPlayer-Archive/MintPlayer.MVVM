@@ -1,10 +1,10 @@
 <Project>
   <PropertyGroup>
-    <Company>TrackMan</Company>
-    <Copyright>Copyright © TrackMan A/S</Copyright>
-    <RepositoryUrl>https://trackman.visualstudio.com/Design/_git/DesignXamarin</RepositoryUrl>
-    <Authors>TCI</Authors>
-    <Owners>TCI</Owners>
+    <Company>MintPlayer</Company>
+    <Copyright>Copyright © MintPlayer</Copyright>
+    <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM</RepositoryUrl>
+    <Authors>Pieterjan De Clippel</Authors>
+    <Owners>MintPlayer</Owners>
     <PackageReleaseNotes />
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
