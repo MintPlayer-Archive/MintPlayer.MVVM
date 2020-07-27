@@ -24,12 +24,8 @@ namespace MintPlayer.MVVM.Demo.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            var xf_app = Platforms.Android.Platform.Init<App>(this);
 
-            var services = new ServiceCollection()
-                .AddMintPlayerMvvm()
-                .AddSingleton<App>()
-                .BuildServiceProvider();
-            var xf_app = services.GetService<App>();
             LoadApplication(xf_app);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

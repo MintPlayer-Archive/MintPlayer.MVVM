@@ -44,6 +44,7 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Common\**\*.cs" />
+    
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
     <AndroidResource Include="Resources\**\*.axml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
   </ItemGroup>
@@ -51,11 +52,15 @@
   <ItemGroup>
     <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
     <None Remove="Platforms\Common\NavigationService.cs" />
+    <None Remove="Platforms\Common\Platform.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
+
+    <!--<PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />-->
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
   </ItemGroup>
 
 </Project>

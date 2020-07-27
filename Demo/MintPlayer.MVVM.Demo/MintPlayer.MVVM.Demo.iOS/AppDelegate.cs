@@ -33,6 +33,8 @@ namespace MintPlayer.MVVM.Demo.iOS
             var xf_app = services.GetService<App>();
             LoadApplication(xf_app);
 
+            MintPlayer.MVVM.Platforms.iOS.Platform.Init<App>(this);
+
             return base.FinishedLaunching(app, options);
         }
     }

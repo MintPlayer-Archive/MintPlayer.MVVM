@@ -22,13 +22,7 @@ namespace MintPlayer.MVVM.Demo.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
-            var services = new ServiceCollection()
-                .AddMintPlayerMvvm()
-                .AddSingleton<Demo.App>()
-                .BuildServiceProvider();
-            var xf_app = services.GetService<Demo.App>();
-
+            var xf_app = Platforms.UAP.Platform.Init<MintPlayer.MVVM.Demo.App>(this);
             LoadApplication(xf_app);
         }
     }
