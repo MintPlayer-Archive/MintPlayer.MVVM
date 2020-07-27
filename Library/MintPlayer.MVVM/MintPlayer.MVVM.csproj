@@ -10,8 +10,10 @@
     <Authors>Pieterjan De Clippel</Authors>
     <Company>MintPlayer</Company>
     <Product>MintPlayer.MVVM</Product>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
-    <Version>1.0.0-preview1</Version>
+    <Version>1.0.0</Version>
     <Copyright />
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM</PackageProjectUrl>

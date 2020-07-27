@@ -26,14 +26,8 @@ namespace MintPlayer.MVVM.Demo.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            var services = new ServiceCollection()
-                .AddMintPlayerMvvm()
-                .AddSingleton<App>()
-                .BuildServiceProvider();
-            var xf_app = services.GetService<App>();
+            var xf_app = MintPlayer.MVVM.Platforms.iOS.Platform.Init<App>(this);
             LoadApplication(xf_app);
-
-            MintPlayer.MVVM.Platforms.iOS.Platform.Init<App>(this);
 
             return base.FinishedLaunching(app, options);
         }
