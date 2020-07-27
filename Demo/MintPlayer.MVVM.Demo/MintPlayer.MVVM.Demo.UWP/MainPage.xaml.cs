@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using MintPlayer.MVVM.Platforms.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,7 +23,13 @@ namespace MintPlayer.MVVM.Demo.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new MintPlayer.MVVM.Demo.App());
+            var services = new ServiceCollection()
+                .AddMintPlayerMvvm()
+                .AddSingleton<Demo.App>()
+                .BuildServiceProvider();
+            var xf_app = services.GetService<Demo.App>();
+
+            LoadApplication(xf_app);
         }
     }
 }

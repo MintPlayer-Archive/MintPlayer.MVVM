@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.Extensions.DependencyInjection;
+using MintPlayer.MVVM.Platforms.Common;
 using UIKit;
 
 namespace MintPlayer.MVVM.Demo.iOS
@@ -23,7 +25,13 @@ namespace MintPlayer.MVVM.Demo.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            var services = new ServiceCollection()
+                .AddMintPlayerMvvm()
+                .AddSingleton<App>()
+                .BuildServiceProvider();
+            var xf_app = services.GetService<App>();
+            LoadApplication(xf_app);
 
             return base.FinishedLaunching(app, options);
         }

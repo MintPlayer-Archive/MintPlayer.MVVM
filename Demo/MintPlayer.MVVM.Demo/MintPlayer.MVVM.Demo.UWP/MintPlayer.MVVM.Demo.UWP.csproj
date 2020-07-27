@@ -149,10 +149,14 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\MintPlayer.MVVM\MintPlayer.MVVM.csproj">
+      <Project>{28f48e0d-17ca-4166-8030-d0987f03d1de}</Project>
+      <Name>MintPlayer.MVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj">
       <Project>{859A3F72-03E8-446E-A74D-CF0358C27BBC}</Project>
       <Name>MintPlayer.MVVM.Demo</Name>

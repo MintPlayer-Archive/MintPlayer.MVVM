@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using MintPlayer.MVVM.Platforms.Common;
 
 namespace MintPlayer.MVVM.Demo.Droid
 {
@@ -21,7 +24,13 @@ namespace MintPlayer.MVVM.Demo.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            var services = new ServiceCollection()
+                .AddMintPlayerMvvm()
+                .AddSingleton<App>()
+                .BuildServiceProvider();
+            var xf_app = services.GetService<App>();
+            LoadApplication(xf_app);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
