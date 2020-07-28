@@ -5,7 +5,7 @@ namespace MintPlayer.MVVM.Platforms.Common
 {
     public static class MintPlayerMvvmExtensions
     {
-        public static IServiceCollection AddMintPlayerMvvm(this IServiceCollection services)
+        internal static IServiceCollection AddMintPlayerMvvm(this IServiceCollection services)
         {
             // Setup configuration
             var configuration = new ConfigurationBuilder()
