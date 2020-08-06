@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using Microsoft.Extensions.DependencyInjection;
-using MintPlayer.MVVM.Platforms.Common;
+﻿using Foundation;
 using UIKit;
 
 namespace MintPlayer.MVVM.Demo.iOS
@@ -26,8 +20,7 @@ namespace MintPlayer.MVVM.Demo.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            var xf_app = MintPlayer.MVVM.Platforms.iOS.Platform.Init<App>(this);
-            LoadApplication(xf_app);
+            Platforms.iOS.Platform.Init<App, Startup>(this);
 
             return base.FinishedLaunching(app, options);
         }

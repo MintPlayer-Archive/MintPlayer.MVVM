@@ -13,7 +13,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1-preview1</Version>
     <Copyright />
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM</PackageProjectUrl>
@@ -52,14 +52,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Platforms\Common\IStartup.cs" />
     <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
     <None Remove="Platforms\Common\NavigationService.cs" />
     <None Remove="Platforms\Common\Platform.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
+    <PackageReference Include="MintPlayer.Reflection.Extensions" Version="1.0.0" />
 
     <!--<PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />-->
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
