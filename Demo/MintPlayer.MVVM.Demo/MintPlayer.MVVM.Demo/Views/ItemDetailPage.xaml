@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
 
              mc:Ignorable="d"
-             d:BindingContext="{x:Static ItemDetailVM}"
+             d:BindingContext="{x:Static vm:ItemDetailVM}"
              x:Class="MintPlayer.MVVM.Demo.Views.ItemDetailPage"
 
              Title="{Binding Title}">

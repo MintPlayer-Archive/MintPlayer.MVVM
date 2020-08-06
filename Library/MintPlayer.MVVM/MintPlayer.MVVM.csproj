@@ -52,6 +52,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Platforms\Common\Event2CommandBehavior.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Platforms\Common\BaseModel.cs" />
+    <None Remove="Platforms\Common\BaseViewModel.cs" />
+    <None Remove="Platforms\Common\Event2CommandBehavior.cs" />
     <None Remove="Platforms\Common\IStartup.cs" />
     <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
     <None Remove="Platforms\Common\NavigationService.cs" />

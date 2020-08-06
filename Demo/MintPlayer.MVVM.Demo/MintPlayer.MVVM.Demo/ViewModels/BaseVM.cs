@@ -7,10 +7,12 @@ using Xamarin.Forms;
 
 using MintPlayer.MVVM.Demo.Models;
 using MintPlayer.MVVM.Demo.Services;
+using MintPlayer.MVVM.Platforms.Common;
+using System.Threading.Tasks;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
-    public class BaseVM : INotifyPropertyChanged
+    public class BaseVM : BaseViewModel
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
@@ -28,9 +30,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             set { SetProperty(ref title, value); }
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName] string propertyName = "",
-            Action onChanged = null)
+        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = "", Action onChanged = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
                 return false;
@@ -40,17 +40,5 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

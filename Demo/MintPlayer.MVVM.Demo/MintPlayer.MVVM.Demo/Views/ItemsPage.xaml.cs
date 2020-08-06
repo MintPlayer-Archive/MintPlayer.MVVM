@@ -25,24 +25,11 @@ namespace MintPlayer.MVVM.Demo.Views
             InitializeComponent();
         }
 
-        async void OnItemSelected(object sender, EventArgs args)
-        {
-            var layout = (BindableObject)sender;
-            var item = (Item)layout.BindingContext;
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailVM(item)));
-        }
-
-        private async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            if (viewModel.Items.Count == 0)
-                viewModel.IsBusy = true;
-        }
+        //async void OnItemSelected(object sender, EventArgs args)
+        //{
+        //    var layout = (BindableObject)sender;
+        //    var item = (Item)layout.BindingContext;
+        //    await Navigation.PushAsync(new ItemDetailPage(new ItemDetailVM(item)));
+        //}
     }
 }

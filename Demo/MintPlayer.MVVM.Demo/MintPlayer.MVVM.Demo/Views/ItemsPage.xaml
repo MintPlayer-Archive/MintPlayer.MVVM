@@ -4,22 +4,19 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
-             mc:Ignorable="d"
-             x:Class="MintPlayer.MVVM.Demo.Views.ItemsPage"
-             Title="{Binding Title}"
-             x:Name="BrowseItemsPage">
 
-    <ContentPage.BindingContext>
-        <vm:ItemsVM x:Name="viewModel" />
-    </ContentPage.BindingContext>
-    
+             mc:Ignorable="d"
+             d:BindingContext="{x:Static vm:ItemsVM}"
+             x:Class="MintPlayer.MVVM.Demo.Views.ItemsPage"
+
+             Title="{Binding Title}">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
 
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
-        <CollectionView x:Name="ItemsCollectionView"
-                ItemsSource="{Binding Items}">
+        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
             <d:CollectionView.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>First Item</x:String>
@@ -43,9 +40,9 @@
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected"></TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
+                        <!--<StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="{}"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>-->
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -31,9 +31,10 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         #endregion
 
         #region Methods
-        private void OnSave(object obj)
+        private async void OnSave(object obj)
         {
-            throw new NotImplementedException();
+            MessagingCenter.Send(this, "AddItem", Item);
+            await navigationService.Pop(true);
         }
 
         private bool CanSave(object arg)
@@ -41,9 +42,9 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             return true;
         }
 
-        private void OnCancel(object obj)
+        private async void OnCancel(object obj)
         {
-            throw new NotImplementedException();
+            await navigationService.Pop(true);
         }
 
         private bool CanCancel(object arg)

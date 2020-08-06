@@ -4,17 +4,16 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
+
              mc:Ignorable="d"
+             d:BindingContext="{x:Static vm:NewItemVM}"
              x:Class="MintPlayer.MVVM.Demo.Views.NewItemPage"
+
              Title="New Item">
 
-    <ContentPage.BindingContext>
-        <vm:NewItemVM x:Name="viewModel" />
-    </ContentPage.BindingContext>
-    
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
-        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+        <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
+        <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>

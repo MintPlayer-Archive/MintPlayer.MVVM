@@ -1,16 +1,23 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
     public interface INavigationService
     {
-        Task NavigateAsync<TViewModel>();
+        Task SetMainNavigation(INavigation navigation);
+        Task SetMainPage<TViewModel>();
+        Task Navigate<TViewModel>(bool modal = false);
+        Task Navigate<TViewModel>(Action<TViewModel> data, bool modal = false);
+        Task Pop(bool modal = false);
     }
 
     internal class NavigationService : INavigationService
     {
+        private INavigation navigation;
         private readonly IViewModelLocator viewModelLocator;
         private readonly IServiceProvider serviceProvider;
         public NavigationService(IViewModelLocator viewModelLocator, IServiceProvider serviceProvider)
@@ -19,13 +26,64 @@ namespace MintPlayer.MVVM.Platforms.Common
             this.serviceProvider = serviceProvider;
         }
 
-        public Task NavigateAsync<TViewModel>()
+        public Task SetMainNavigation(INavigation navigation)
         {
-            var viewModel = ActivatorUtilities.CreateInstance<TViewModel>(serviceProvider);
+            if (this.navigation != null)
+                throw new Exception("Navigation can only be set once");
+
+            this.navigation = navigation;
+            return Task.CompletedTask;
+        }
+
+        public async Task SetMainPage<TViewModel>()
+        {
+            var page = PageFromVM<TViewModel>();
+
+            var firstPage = navigation.NavigationStack.FirstOrDefault();
+            if (firstPage == null)
+            {
+                await navigation.PushAsync(page);
+            }
+            else
+            {
+                navigation.InsertPageBefore(page, firstPage);
+                await navigation.PopToRootAsync();
+            }
+        }
+
+        public async Task Navigate<TViewModel>(bool modal = false)
+        {
+            var page = PageFromVM<TViewModel>();
+            if (modal)
+                await navigation.PushModalAsync(page);
+            else
+                await navigation.PushAsync(page);
+        }
+
+        public async Task Navigate<TViewModel>(Action<TViewModel> data, bool modal = false)
+        {
+            var page = PageFromVM<TViewModel>();
+            data((TViewModel)page.BindingContext);
+            if (modal)
+                await navigation.PushModalAsync(page);
+            else
+                await navigation.PushAsync(page);
+        }
+
+        public async Task Pop(bool modal = false)
+        {
+            if (modal)
+                await navigation.PopModalAsync();
+            else
+                await navigation.PopAsync();
+        }
+
+        private Page PageFromVM<TViewModel>()
+        {
             var viewType = viewModelLocator.Resolve<TViewModel>();
-            var view = Activator.CreateInstance(viewType, viewModel);
-
-
+            var view = (Page)Activator.CreateInstance(viewType);
+            view.BindingContext = ActivatorUtilities.CreateInstance<TViewModel>(serviceProvider);
+            return view;
         }
     }
 }

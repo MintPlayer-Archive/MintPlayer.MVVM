@@ -6,6 +6,7 @@ using MintPlayer.MVVM.Demo.Models;
 using MintPlayer.MVVM.Demo.Views;
 using System.Windows.Input;
 using MintPlayer.MVVM.Platforms.Common;
+using System.Threading.Tasks;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
@@ -61,9 +62,18 @@ namespace MintPlayer.MVVM.Demo.ViewModels
                 IsBusy = false;
             }
         }
+
         private async void OnAddItem(object parameter)
         {
-            await navigationService.NavigateAsync()
+            await navigationService.Navigate<NewItemVM>();
+        }
+
+        protected override Task OnNavigatedTo()
+        {
+            if (Items.Count == 0)
+                IsBusy = true;
+
+            return base.OnNavigatedTo();
         }
         #endregion
     }
