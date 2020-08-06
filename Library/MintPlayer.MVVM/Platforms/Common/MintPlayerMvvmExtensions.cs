@@ -10,8 +10,7 @@ namespace MintPlayer.MVVM.Platforms.Common
 {
     public static class MintPlayerMvvmExtensions
     {
-
-        public static IServiceCollection AddMintPlayerMvvm<TStartup>(this IServiceCollection services) where TStartup : IStartup
+        internal static IServiceCollection AddMintPlayerMvvm<TStartup>(this IServiceCollection services) where TStartup : IStartup
         {
             var tstartup = typeof(TStartup);
             if (tstartup.GetInterfaces(true).Contains(typeof(IStartup)))
