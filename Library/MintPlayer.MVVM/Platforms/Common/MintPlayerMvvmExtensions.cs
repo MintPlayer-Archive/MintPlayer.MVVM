@@ -24,10 +24,14 @@ namespace MintPlayer.MVVM.Platforms.Common
             var appSettingsPlatformStream = tstartup.Assembly.GetManifestResourceStream($"{tstartup.Assembly.GetName().Name}.appsettings.json");
 
             // Setup configuration
-            var configuration = new ConfigurationBuilder()
-                .AddJsonStream(appSettingsXamarinFormsStream)
-                .AddJsonStream(appSettingsPlatformStream)
-                .Build();
+            var configurationBuilder = new ConfigurationBuilder();
+            if (appSettingsXamarinFormsStream != null)
+                configurationBuilder.AddJsonStream(appSettingsXamarinFormsStream);
+
+            if (appSettingsPlatformStream != null)
+                configurationBuilder.AddJsonStream(appSettingsPlatformStream);
+
+            var configuration = configurationBuilder.Build();
 
             // Setup Dependency Injection
             var serviceCollection = services
