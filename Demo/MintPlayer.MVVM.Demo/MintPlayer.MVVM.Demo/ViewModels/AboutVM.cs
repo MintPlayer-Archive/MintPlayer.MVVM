@@ -5,14 +5,19 @@ using Xamarin.Forms;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutVM : BaseVM
     {
-        public AboutViewModel()
+        public AboutVM()
         {
             Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
+            OpenWebCommand = new Command(OnOpenWeb);
         }
 
         public ICommand OpenWebCommand { get; }
+
+        private async void OnOpenWeb(object parameter)
+        {
+            await Browser.OpenAsync("https://xamarin.com");
+        }
     }
 }

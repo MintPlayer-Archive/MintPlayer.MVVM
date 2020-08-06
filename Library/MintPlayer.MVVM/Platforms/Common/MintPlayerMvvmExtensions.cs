@@ -38,6 +38,8 @@ namespace MintPlayer.MVVM.Platforms.Common
                 .AddSingleton<IConfiguration>(configuration)
                 .AddSingleton<INavigationService, NavigationService>();
 
+            serviceCollection.AddSingleton<IViewModelLocator>(new ViewModelLocator(tstartup));
+
             // Create an instance of the startup class
             var startup = (TStartup)tstartup.GetConstructor(new[] { typeof(IConfiguration) }).Invoke(new object[] { configuration });
             startup.ConfigureServices(serviceCollection);

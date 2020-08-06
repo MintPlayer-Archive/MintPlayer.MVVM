@@ -10,7 +10,7 @@ using MintPlayer.MVVM.Demo.Services;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class BaseVM : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 

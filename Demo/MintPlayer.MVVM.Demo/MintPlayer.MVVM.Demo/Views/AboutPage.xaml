@@ -3,14 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="MintPlayer.MVVM.Demo.Views.AboutPage"
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
+
+             mc:Ignorable="d"
+             d:BindingContext="{x:Static vm:AboutVM}"
+             x:Class="MintPlayer.MVVM.Demo.Views.AboutPage"
+
              Title="{Binding Title}">
-    
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
     
     <ContentPage.Resources>
         <ResourceDictionary>

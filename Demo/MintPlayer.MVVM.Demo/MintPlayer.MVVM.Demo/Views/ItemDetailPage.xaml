@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
+
              mc:Ignorable="d"
+             d:BindingContext="{x:Static ItemDetailVM}"
              x:Class="MintPlayer.MVVM.Demo.Views.ItemDetailPage"
+
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">

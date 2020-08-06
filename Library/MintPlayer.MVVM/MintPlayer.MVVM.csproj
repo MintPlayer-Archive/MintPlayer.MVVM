@@ -56,6 +56,8 @@
     <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
     <None Remove="Platforms\Common\NavigationService.cs" />
     <None Remove="Platforms\Common\Platform.cs" />
+    <None Remove="Platforms\Common\ViewModelAttribute.cs" />
+    <None Remove="Platforms\Common\ViewModelLocator.cs" />
   </ItemGroup>
 
   <ItemGroup>
