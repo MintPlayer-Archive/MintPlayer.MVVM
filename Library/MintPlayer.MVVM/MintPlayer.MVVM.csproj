@@ -1,11 +1,12 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.41">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.1.2">
 
   <!-- You must have the Android 8.0 SDK installed through the Android SDK manager -->
 
   <PropertyGroup>
     <AssemblyName>MintPlayer.MVVM</AssemblyName>
     <RootNamespace>MintPlayer.MVVM</RootNamespace>
-    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid80;uap10.0.16299</TargetFrameworks>
+    <!--<TargetFrameworks>netstandard2.1;Xamarin.iOS10;MonoAndroid90;uap10.0.18362</TargetFrameworks>-->
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
     <Authors>Pieterjan De Clippel</Authors>
     <Company>MintPlayer</Company>
@@ -74,7 +75,8 @@
     <PackageReference Include="MintPlayer.Reflection.Extensions" Version="1.0.0" />
 
     <!--<PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />-->
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <!--<PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />-->
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />
   </ItemGroup>
 
 </Project>
