@@ -20,8 +20,6 @@ namespace MintPlayer.MVVM.Demo
 
             navigationService.SetMainNavigation(((MasterDetailPage)MainPage).Detail.Navigation);
             navigationService.SetMainPage<ItemsVM>();
-
-            DependencyService.Register<MockDataStore>();
         }
 
         protected override void OnStart()

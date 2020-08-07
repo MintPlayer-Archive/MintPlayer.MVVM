@@ -4,12 +4,12 @@ namespace MintPlayer.MVVM.Platforms.Common
 {
     public abstract class BaseViewModel : BaseModel
     {
-        protected virtual Task OnNavigatedTo()
+        protected internal virtual Task OnNavigatedTo()
         {
             return Task.CompletedTask;
         }
 
-        protected virtual Task OnNavigatedFrom()
+        protected internal virtual Task OnNavigatedFrom()
         {
             return Task.CompletedTask;
         }

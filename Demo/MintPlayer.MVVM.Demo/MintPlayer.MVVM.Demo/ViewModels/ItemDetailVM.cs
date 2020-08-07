@@ -6,13 +6,15 @@ namespace MintPlayer.MVVM.Demo.ViewModels
     {
         public ItemDetailVM()
         {
-            Item = new Item
+            Item = new Artist
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Id = 0,
+                Name = "New artist",
+                YearStarted = null,
+                YearQuit = null
             };
         }
 
-        public Item Item { get; set; }
+        public Artist Item { get; set; }
     }
 }

@@ -7,31 +7,33 @@ using MintPlayer.MVVM.Demo.Views;
 using System.Windows.Input;
 using MintPlayer.MVVM.Platforms.Common;
 using System.Threading.Tasks;
+using MintPlayer.MVVM.Demo.Services;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
     public class ItemsVM : BaseVM
     {
         private readonly INavigationService navigationService;
-        public ItemsVM(INavigationService navigationService)
+        private readonly IArtistService artistService;
+        public ItemsVM(INavigationService navigationService, IArtistService artistService)
         {
             this.navigationService = navigationService;
-
+            this.artistService = artistService;
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Items = new MintPlayer.ObservableCollection.ObservableCollection<Artist>();
             LoadItemsCommand = new Command(OnLoadItems);
             AddItemCommand = new Command(OnAddItem);
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            MessagingCenter.Subscribe<NewItemPage, Artist>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item;
                 Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                //await DataStore.AddItemAsync(newItem);
             });
         }
 
         #region Bindings
-        public ObservableCollection<Item> Items { get; set; }
+        public MintPlayer.ObservableCollection.ObservableCollection<Artist> Items { get; set; }
         #endregion
 
         #region Commands
@@ -42,16 +44,31 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         #region Methods
         private async void OnLoadItems()
         {
-            IsBusy = true;
+            await ReloadItems();
+        }
 
+        private async void OnAddItem(object parameter)
+        {
+            await navigationService.Navigate<NewItemVM>();
+        }
+
+        protected override async Task OnNavigatedTo()
+        {
+            if (Items.Count == 0)
+            {
+                await ReloadItems();
+            }
+        }
+
+        private async Task ReloadItems()
+        {
             try
             {
+                IsBusy = true;
+
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
+                var items = await artistService.GetArtists();
+                Items.AddRange(items);
             }
             catch (Exception ex)
             {
@@ -61,19 +78,6 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             {
                 IsBusy = false;
             }
-        }
-
-        private async void OnAddItem(object parameter)
-        {
-            await navigationService.Navigate<NewItemVM>();
-        }
-
-        protected override Task OnNavigatedTo()
-        {
-            if (Items.Count == 0)
-                IsBusy = true;
-
-            return base.OnNavigatedTo();
         }
         #endregion
     }

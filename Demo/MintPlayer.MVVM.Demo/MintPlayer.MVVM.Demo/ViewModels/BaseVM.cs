@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Runtime.CompilerServices;
-
-using Xamarin.Forms;
-
-using MintPlayer.MVVM.Demo.Models;
-using MintPlayer.MVVM.Demo.Services;
 using MintPlayer.MVVM.Platforms.Common;
-using System.Threading.Tasks;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
     public class BaseVM : BaseViewModel
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-
         bool isBusy = false;
         public bool IsBusy
         {

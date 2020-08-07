@@ -1,5 +1,6 @@
 ﻿using MintPlayer.MVVM.Platforms.Common;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,10 +11,12 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         private readonly INavigationService navigationService;
         public NewItemVM(INavigationService navigationService)
         {
-            Item = new Models.Item
+            Item = new Models.Artist
             {
-                Text = "Item name",
-                Description = "This is an item description."
+                Id = 0,
+                Name = "New artist",
+                YearStarted = null,
+                YearQuit = null
             };
 
             SaveCommand = new Command(OnSave, CanSave);
@@ -22,7 +25,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         }
 
         #region Bindings
-        public Models.Item Item { get; set; }
+        public Models.Artist Item { get; set; }
         #endregion
 
         #region Commands
@@ -31,6 +34,11 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         #endregion
 
         #region Methods
+        protected override Task OnNavigatedTo()
+        {
+            return base.OnNavigatedTo();
+        }
+
         private async void OnSave(object obj)
         {
             MessagingCenter.Send(this, "AddItem", Item);
