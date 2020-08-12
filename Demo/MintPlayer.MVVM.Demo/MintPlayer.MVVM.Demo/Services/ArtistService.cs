@@ -12,7 +12,7 @@ namespace MintPlayer.MVVM.Demo.Services
     public interface IArtistService
     {
         Task<IEnumerable<Artist>> GetArtists();
-        Task<Artist> GetArtist();
+        Task<Artist> GetArtist(int id, bool include_relations = false);
         Task<Artist> InsertArtist(Artist artist);
         Task<Artist> UpdateArtist(Artist artist);
         Task<Artist> DeleteArtist(Artist artist);
@@ -36,9 +36,18 @@ namespace MintPlayer.MVVM.Demo.Services
             }
         }
 
-        public Task<Artist> GetArtist()
+        public async Task<Artist> GetArtist(int id, bool include_relations = false)
         {
-            throw new NotImplementedException();
+            using (var message = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/Artist/{id}"))
+            {
+                message.Headers.Add("include_relations", include_relations ? "true" : "false");
+                using (var response = await httpClient.SendAsync(message))
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var artist = JsonConvert.DeserializeObject<Artist>(content);
+                    return artist;
+                }
+            }
         }
 
         public Task<Artist> InsertArtist(Artist artist)

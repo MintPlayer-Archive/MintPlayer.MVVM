@@ -34,11 +34,6 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         #endregion
 
         #region Methods
-        protected override Task OnNavigatedTo()
-        {
-            return base.OnNavigatedTo();
-        }
-
         private async void OnSave(object obj)
         {
             MessagingCenter.Send(this, "AddItem", Item);

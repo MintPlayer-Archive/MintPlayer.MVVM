@@ -62,6 +62,7 @@
     <None Remove="Platforms\Common\Event2CommandBehavior.cs" />
     <None Remove="Platforms\Common\IStartup.cs" />
     <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
+    <None Remove="Platforms\Common\NavigationParameters.cs" />
     <None Remove="Platforms\Common\NavigationService.cs" />
     <None Remove="Platforms\Common\Platform.cs" />
     <None Remove="Platforms\Common\ViewModelAttribute.cs" />

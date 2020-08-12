@@ -20,27 +20,39 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             this.navigationService = navigationService;
             this.artistService = artistService;
             Title = "Browse";
-            Items = new ObservableCollection<Artist>();
+            Artists = new ObservableCollection<Artist>();
             LoadItemsCommand = new Command(OnLoadItems);
             AddItemCommand = new Command(OnAddItem);
-            SelectItemCommand = new Command(OnSelectItem);
+            SelectArtistCommand = new Command(OnSelectArtist);
 
             MessagingCenter.Subscribe<NewItemPage, Artist>(this, "AddItem", async (obj, item) =>
             {
                 var newItem = item;
-                Items.Add(newItem);
+                Artists.Add(newItem);
                 //await DataStore.AddItemAsync(newItem);
             });
         }
 
         #region Bindings
-        public ObservableCollection<Artist> Items { get; set; }
+        public ObservableCollection<Artist> Artists { get; set; }
+        #region SelectedItem
+        private Artist selectedArtist;
+        public Artist SelectedArtist
+        {
+            get => selectedArtist;
+            set
+            {
+                selectedArtist = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
         #endregion
 
         #region Commands
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddItemCommand { get; set; }
-        public ICommand SelectItemCommand { get; set; }
+        public ICommand SelectArtistCommand { get; set; }
         #endregion
 
         #region Methods
@@ -54,9 +66,9 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             await navigationService.Navigate<NewItemVM>();
         }
 
-        protected override async Task OnNavigatedTo()
+        protected override async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            if (Items.Count == 0)
+            if (Artists.Count == 0)
             {
                 await ReloadItems();
             }
@@ -68,11 +80,11 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             {
                 IsBusy = true;
 
-                Items.Clear();
+                Artists.Clear();
                 var items = await artistService.GetArtists();
                 //Items.AddRange(items);
                 foreach (var item in items)
-                    Items.Add(item);
+                    Artists.Add(item);
             }
             catch (Exception ex)
             {
@@ -84,9 +96,15 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             }
         }
 
-        private void OnSelectItem(object obj)
+        private void OnSelectArtist(object obj)
         {
-            navigationService.Navigate<ItemDetailVM>((model) => { model.Artist = obj as Artist; });
+            var artist = obj as Artist;
+            if (artist != null)
+            {
+                //navigationService.Navigate<ItemDetailVM>((model) => { model.Artist = obj as Artist; });
+                navigationService.Navigate<ItemDetailVM>(new NavigationParameters { { "ArtistId", artist.Id } });
+                SelectedArtist = null;
+            }
         }
         #endregion
     }

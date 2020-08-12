@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
-    public interface IViewModelLocator
+    internal interface IViewModelLocator
     {
         Type Resolve<TViewModel>();
     }

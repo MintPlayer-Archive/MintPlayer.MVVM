@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
-    public static class MintPlayerMvvmExtensions
+    internal static class MintPlayerMvvmExtensions
     {
         internal static IServiceCollection AddMintPlayerMvvm<TStartup>(this IServiceCollection services) where TStartup : IStartup
         {

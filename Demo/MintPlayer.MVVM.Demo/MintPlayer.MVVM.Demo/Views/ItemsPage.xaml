@@ -18,9 +18,10 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <conv:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+        <conv:TappedItemEventArgsToSelectedItemConverter x:Key="TappedItemConverter" />
     </ContentPage.Resources>
 
-    <ListView ItemsSource="{Binding Items}" IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" RefreshCommand="{Binding LoadItemsCommand}">
+    <ListView ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" RefreshCommand="{Binding LoadItemsCommand}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -42,36 +43,7 @@
             </DataTemplate>
         </ListView.ItemTemplate>
         <ListView.Behaviors>
-            <mint:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+            <mint:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectArtistCommand}" Converter="{StaticResource TappedItemConverter}" />
         </ListView.Behaviors>
     </ListView>
-
-    <!--<RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
-        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding Name}" 
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                        <Label Text="{Binding YearStarted}" 
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                        <Label Text="{Binding YearQuit}" 
-                                LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
-                        <StackLayout.Behaviors>
-                            <mint:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
-                        </StackLayout.Behaviors>
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>-->
 </ContentPage>

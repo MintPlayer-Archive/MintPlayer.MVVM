@@ -10,6 +10,6 @@ namespace MintPlayer.MVVM.Platforms.Common
             ViewModelType = viewModelType;
         }
 
-        public Type ViewModelType { get; }
+        internal Type ViewModelType { get; }
     }
 }

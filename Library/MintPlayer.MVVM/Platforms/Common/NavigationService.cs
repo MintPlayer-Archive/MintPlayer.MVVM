@@ -12,6 +12,7 @@ namespace MintPlayer.MVVM.Platforms.Common
         Task SetMainPage<TViewModel>();
         Task Navigate<TViewModel>(bool modal = false);
         Task Navigate<TViewModel>(Action<TViewModel> data, bool modal = false);
+        Task Navigate<TViewModel>(NavigationParameters parameters, bool modal = false);
         Task Pop(bool modal = false);
     }
 
@@ -49,7 +50,7 @@ namespace MintPlayer.MVVM.Platforms.Common
                 navigation.InsertPageBefore(page, firstPage);
                 await navigation.PopToRootAsync();
             }
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo();
+            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
         }
 
         public async Task Navigate<TViewModel>(bool modal = false)
@@ -60,7 +61,7 @@ namespace MintPlayer.MVVM.Platforms.Common
             else
                 await navigation.PushAsync(page);
 
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo();
+            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
         }
 
         public async Task Navigate<TViewModel>(Action<TViewModel> data, bool modal = false)
@@ -72,7 +73,18 @@ namespace MintPlayer.MVVM.Platforms.Common
             else
                 await navigation.PushAsync(page);
 
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo();
+            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
+        }
+
+        public async Task Navigate<TViewModel>(NavigationParameters parameters, bool modal = false)
+        {
+            var page = PageFromVM<TViewModel>();
+            if (modal)
+                await navigation.PushModalAsync(page);
+            else
+                await navigation.PushAsync(page);
+
+            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(parameters);
         }
 
         public async Task Pop(bool modal = false)

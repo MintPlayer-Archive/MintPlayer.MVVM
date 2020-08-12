@@ -1,11 +1,16 @@
 ﻿using MintPlayer.MVVM.Demo.Models;
+using MintPlayer.MVVM.Demo.Services;
+using MintPlayer.MVVM.Platforms.Common;
+using System.Threading.Tasks;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
     public class ItemDetailVM : BaseVM
     {
-        public ItemDetailVM()
+        private readonly IArtistService artistService;
+        public ItemDetailVM(IArtistService artistService)
         {
+            this.artistService = artistService;
         }
 
         #region Artist
@@ -20,5 +25,11 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             }
         }
         #endregion
+
+        protected override async Task OnNavigatedTo(NavigationParameters parameters)
+        {
+            var artist = await artistService.GetArtist(parameters.GetValue<int>("ArtistId"), true);
+            Artist = artist;
+        }
     }
 }
