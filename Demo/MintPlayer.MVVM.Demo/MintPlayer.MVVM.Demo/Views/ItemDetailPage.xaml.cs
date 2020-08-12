@@ -15,7 +15,7 @@ namespace MintPlayer.MVVM.Demo.Views
     [DesignTimeVisible(false)]
     public partial class ItemDetailPage : ContentPage
     {
-        public ItemDetailPage(ItemDetailVM viewModel)
+        public ItemDetailPage()
         {
             InitializeComponent();
         }

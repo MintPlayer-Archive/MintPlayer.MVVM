@@ -20,9 +20,10 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             this.navigationService = navigationService;
             this.artistService = artistService;
             Title = "Browse";
-            Items = new MintPlayer.ObservableCollection.ObservableCollection<Artist>();
+            Items = new ObservableCollection<Artist>();
             LoadItemsCommand = new Command(OnLoadItems);
             AddItemCommand = new Command(OnAddItem);
+            SelectItemCommand = new Command(OnSelectItem);
 
             MessagingCenter.Subscribe<NewItemPage, Artist>(this, "AddItem", async (obj, item) =>
             {
@@ -33,12 +34,13 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         }
 
         #region Bindings
-        public MintPlayer.ObservableCollection.ObservableCollection<Artist> Items { get; set; }
+        public ObservableCollection<Artist> Items { get; set; }
         #endregion
 
         #region Commands
         public ICommand LoadItemsCommand { get; set; }
         public ICommand AddItemCommand { get; set; }
+        public ICommand SelectItemCommand { get; set; }
         #endregion
 
         #region Methods
@@ -68,7 +70,9 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
                 Items.Clear();
                 var items = await artistService.GetArtists();
-                Items.AddRange(items);
+                //Items.AddRange(items);
+                foreach (var item in items)
+                    Items.Add(item);
             }
             catch (Exception ex)
             {
@@ -78,6 +82,11 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        private void OnSelectItem(object obj)
+        {
+            navigationService.Navigate<ItemDetailVM>((model) => { model.Artist = obj as Artist; });
         }
         #endregion
     }

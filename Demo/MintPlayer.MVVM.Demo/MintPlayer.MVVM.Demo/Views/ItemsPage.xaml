@@ -4,7 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
-
+             xmlns:mint="clr-namespace:MintPlayer.Xaml.EventToCommand;assembly=MintPlayer.Xaml.EventToCommand"
+             xmlns:conv="clr-namespace:MintPlayer.MVVM.Demo.Converters"
+             
              mc:Ignorable="d"
              d:BindingContext="{x:Static vm:ItemsVM}"
              x:Class="MintPlayer.MVVM.Demo.Views.ItemsPage"
@@ -14,8 +16,37 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <conv:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+    </ContentPage.Resources>
 
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
+    <ListView ItemsSource="{Binding Items}" IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" RefreshCommand="{Binding LoadItemsCommand}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Name}" 
+                               LineBreakMode="NoWrap" 
+                               Style="{DynamicResource ListItemTextStyle}" 
+                               FontSize="16" />
+                        <Label Text="{Binding YearStarted}" 
+                               LineBreakMode="NoWrap"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               FontSize="13" />
+                        <Label Text="{Binding YearQuit}" 
+                               LineBreakMode="NoWrap"
+                               Style="{DynamicResource ListItemDetailTextStyle}"
+                               FontSize="13" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Behaviors>
+            <mint:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+        </ListView.Behaviors>
+    </ListView>
+
+    <!--<RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Command="{Binding LoadItemsCommand}">
         <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Items}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -32,12 +63,15 @@
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                        <!--<StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="{}"></TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>-->
+                        <StackLayout.Behaviors>
+                            <mint:EventToCommandBehavior EventName="ItemSelected" Command="{Binding SelectItemCommand}" Converter="{StaticResource SelectedItemConverter}" />
+                        </StackLayout.Behaviors>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </RefreshView>
+    </RefreshView>-->
 </ContentPage>

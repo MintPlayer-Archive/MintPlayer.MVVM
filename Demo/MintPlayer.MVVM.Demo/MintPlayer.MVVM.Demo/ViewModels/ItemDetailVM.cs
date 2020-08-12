@@ -6,15 +6,19 @@ namespace MintPlayer.MVVM.Demo.ViewModels
     {
         public ItemDetailVM()
         {
-            Item = new Artist
-            {
-                Id = 0,
-                Name = "New artist",
-                YearStarted = null,
-                YearQuit = null
-            };
         }
 
-        public Artist Item { get; set; }
+        #region Artist
+        private Artist artist;
+        public Artist Artist
+        {
+            get => artist;
+            set
+            {
+                artist = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
     }
 }
