@@ -7,11 +7,14 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 {
     public class BaseVM : BaseViewModel
     {
-        bool isBusy = false;
+        bool isBusy = true;
         public bool IsBusy
         {
             get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
+            set
+            {
+                SetProperty(ref isBusy, value);
+            }
         }
 
         string title = string.Empty;

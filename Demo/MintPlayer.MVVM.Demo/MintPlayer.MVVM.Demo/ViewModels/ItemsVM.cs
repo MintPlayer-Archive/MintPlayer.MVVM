@@ -8,29 +8,34 @@ using System.Windows.Input;
 using MintPlayer.MVVM.Platforms.Common;
 using System.Threading.Tasks;
 using MintPlayer.MVVM.Demo.Services;
+using MintPlayer.MVVM.Platforms.Common.Events;
+using MintPlayer.MVVM.Demo.Events;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
     public class ItemsVM : BaseVM
     {
         private readonly INavigationService navigationService;
+        private readonly IEventAggregator eventAggregator;
         private readonly IArtistService artistService;
-        public ItemsVM(INavigationService navigationService, IArtistService artistService)
+        public ItemsVM(INavigationService navigationService, IEventAggregator eventAggregator, IArtistService artistService)
         {
             this.navigationService = navigationService;
+            this.eventAggregator = eventAggregator;
             this.artistService = artistService;
+
             Title = "Browse";
             Artists = new ObservableCollection<Artist>();
             LoadItemsCommand = new Command(OnLoadItems);
             AddItemCommand = new Command(OnAddItem);
             SelectArtistCommand = new Command(OnSelectArtist);
 
-            MessagingCenter.Subscribe<NewItemPage, Artist>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item;
-                Artists.Add(newItem);
-                //await DataStore.AddItemAsync(newItem);
-            });
+            //MessagingCenter.Subscribe<NewItemPage, Artist>(this, "AddItem", async (obj, item) =>
+            //{
+            //    var newItem = item;
+            //    Artists.Add(newItem);
+            //    //await DataStore.AddItemAsync(newItem);
+            //});
         }
 
         #region Bindings
@@ -63,15 +68,22 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
         private async void OnAddItem(object parameter)
         {
-            await navigationService.Navigate<NewItemVM>();
+            await navigationService.Navigate<NewItemVM>(true);
         }
 
         protected override async Task OnNavigatedTo(NavigationParameters parameters)
         {
+            eventAggregator.GetEvent<ItemCreatedEvent>().Subscribe(OnItemCreated);
             if (Artists.Count == 0)
             {
                 await ReloadItems();
             }
+        }
+
+        protected override Task OnNavigatedFrom()
+        {
+            eventAggregator.GetEvent<ItemCreatedEvent>().Unsubscribe(OnItemCreated);
+            return Task.CompletedTask;
         }
 
         private async Task ReloadItems()
@@ -92,6 +104,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             }
             finally
             {
+                await Task.Delay(50);
                 IsBusy = false;
             }
         }
@@ -104,6 +117,14 @@ namespace MintPlayer.MVVM.Demo.ViewModels
                 //navigationService.Navigate<ItemDetailVM>((model) => { model.Artist = obj as Artist; });
                 navigationService.Navigate<ItemDetailVM>(new NavigationParameters { { "ArtistId", artist.Id } });
                 SelectedArtist = null;
+            }
+        }
+
+        private void OnItemCreated(object item)
+        {
+            if (item is Artist artist)
+            {
+                Artists.Add(artist);
             }
         }
         #endregion

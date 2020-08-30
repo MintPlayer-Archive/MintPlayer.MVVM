@@ -28,8 +28,20 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
         protected override async Task OnNavigatedTo(NavigationParameters parameters)
         {
-            var artist = await artistService.GetArtist(parameters.GetValue<int>("ArtistId"), true);
-            Artist = artist;
+            try
+            {
+                IsBusy = true;
+                await Task.Delay(1000);
+                var artist = await artistService.GetArtist(parameters.GetValue<int>("ArtistId"), true);
+                Artist = artist;
+            }
+            catch (System.Exception)
+            {
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

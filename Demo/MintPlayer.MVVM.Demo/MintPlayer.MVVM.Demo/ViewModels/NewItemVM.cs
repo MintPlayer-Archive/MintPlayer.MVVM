@@ -1,4 +1,6 @@
-﻿using MintPlayer.MVVM.Platforms.Common;
+﻿using MintPlayer.MVVM.Demo.Events;
+using MintPlayer.MVVM.Platforms.Common;
+using MintPlayer.MVVM.Platforms.Common.Events;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,23 +11,26 @@ namespace MintPlayer.MVVM.Demo.ViewModels
     public class NewItemVM : BaseVM
     {
         private readonly INavigationService navigationService;
-        public NewItemVM(INavigationService navigationService)
+        private readonly IEventAggregator eventAggregator;
+
+        public NewItemVM(INavigationService navigationService, IEventAggregator eventAggregator)
         {
-            Item = new Models.Artist
+            this.navigationService = navigationService;
+            this.eventAggregator = eventAggregator;
+
+            Artist = new Models.Artist
             {
                 Id = 0,
-                Name = "New artist",
+                Name = string.Empty,
                 YearStarted = null,
                 YearQuit = null
             };
-
             SaveCommand = new Command(OnSave, CanSave);
             CancelCommand = new Command(OnCancel, CanCancel);
-            this.navigationService = navigationService;
         }
 
         #region Bindings
-        public Models.Artist Item { get; set; }
+        public Models.Artist Artist { get; set; }
         #endregion
 
         #region Commands
@@ -36,7 +41,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         #region Methods
         private async void OnSave(object obj)
         {
-            MessagingCenter.Send(this, "AddItem", Item);
+            eventAggregator.GetEvent<ItemCreatedEvent>().Publish(Artist);
             await navigationService.Pop(true);
         }
 

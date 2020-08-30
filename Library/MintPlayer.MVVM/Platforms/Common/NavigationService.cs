@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
@@ -57,7 +57,7 @@ namespace MintPlayer.MVVM.Platforms.Common
         {
             var page = PageFromVM<TViewModel>();
             if (modal)
-                await navigation.PushModalAsync(page);
+                await navigation.PushModalAsync(new NavigationPage(page));
             else
                 await navigation.PushAsync(page);
 
@@ -89,18 +89,18 @@ namespace MintPlayer.MVVM.Platforms.Common
 
         public async Task Pop(bool modal = false)
         {
-            Page page;
             if (modal)
             {
-                page = navigation.ModalStack.LastOrDefault();
+                var page = (NavigationPage)navigation.ModalStack.LastOrDefault();
                 await navigation.PopModalAsync();
+                await ((BaseViewModel)page.RootPage.BindingContext).OnNavigatedFrom();
             }
             else
             {
-                page = navigation.NavigationStack.LastOrDefault();
+                var page = navigation.NavigationStack.LastOrDefault();
                 await navigation.PopAsync();
+                await ((BaseViewModel)page.BindingContext).OnNavigatedFrom();
             }
-            await ((BaseViewModel)page.BindingContext).OnNavigatedFrom();
         }
 
         private Page PageFromVM<TViewModel>()

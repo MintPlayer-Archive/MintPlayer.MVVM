@@ -14,13 +14,13 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
-    <Version>1.0.1-preview1</Version>
+    <Version>1.0.2</Version>
     <Copyright />
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM</RepositoryUrl>
     <PackageTags>Xamarin.Forms, Viewmodel navigation, Dependency Injection</PackageTags>
-    <PackageReleaseNotes>This package is still under construction</PackageReleaseNotes>
+    <PackageReleaseNotes>The package now contains the publish-subscription pattern</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -60,6 +60,10 @@
     <None Remove="Platforms\Common\BaseModel.cs" />
     <None Remove="Platforms\Common\BaseViewModel.cs" />
     <None Remove="Platforms\Common\Event2CommandBehavior.cs" />
+    <None Remove="Platforms\Common\EventAggregator.cs" />
+    <None Remove="Platforms\Common\Events\AggregatorEvent.cs" />
+    <None Remove="Platforms\Common\Events\PubSubEvent.cs" />
+    <None Remove="Platforms\Common\IEvent.cs" />
     <None Remove="Platforms\Common\IStartup.cs" />
     <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
     <None Remove="Platforms\Common\NavigationParameters.cs" />

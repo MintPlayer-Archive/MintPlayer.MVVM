@@ -19,31 +19,33 @@
     <ContentPage.Resources>
         <conv:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
         <conv:TappedItemEventArgsToSelectedItemConverter x:Key="TappedItemConverter" />
+        <conv:InvertConverter x:Key="InvertConverter" />
     </ContentPage.Resources>
-
-    <ListView ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" RefreshCommand="{Binding LoadItemsCommand}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Padding="10">
-                        <Label Text="{Binding Name}" 
-                               LineBreakMode="NoWrap" 
-                               Style="{DynamicResource ListItemTextStyle}" 
-                               FontSize="16" />
-                        <Label Text="{Binding YearStarted}" 
-                               LineBreakMode="NoWrap"
-                               Style="{DynamicResource ListItemDetailTextStyle}"
-                               FontSize="13" />
-                        <Label Text="{Binding YearQuit}" 
-                               LineBreakMode="NoWrap"
-                               Style="{DynamicResource ListItemDetailTextStyle}"
-                               FontSize="13" />
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        <ListView.Behaviors>
-            <mint:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectArtistCommand}" Converter="{StaticResource TappedItemConverter}" />
-        </ListView.Behaviors>
-    </ListView>
+    <StackLayout Orientation="Vertical">
+        <ListView ItemsSource="{Binding Artists}" SelectedItem="{Binding SelectedArtist, Mode=TwoWay}" HasUnevenRows="True" IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" RefreshCommand="{Binding LoadItemsCommand}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" 
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="16" />
+                            <Label Text="{Binding YearStarted}" 
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                            <Label Text="{Binding YearQuit}" 
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <mint:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectArtistCommand}" Converter="{StaticResource TappedItemConverter}" />
+            </ListView.Behaviors>
+        </ListView>
+    </StackLayout>
 </ContentPage>

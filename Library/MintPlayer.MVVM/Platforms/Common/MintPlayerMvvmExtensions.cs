@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MintPlayer.MVVM.Platforms.Common.Events;
 using MintPlayer.Reflection.Extensions;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,8 @@ namespace MintPlayer.MVVM.Platforms.Common
             // Setup Dependency Injection
             var serviceCollection = services
                 .AddSingleton<IConfiguration>(configuration)
-                .AddSingleton<INavigationService, NavigationService>();
+                .AddSingleton<INavigationService, NavigationService>()
+                .AddSingleton<IEventAggregator, EventAggregator>();
 
             serviceCollection.AddSingleton<IViewModelLocator>(new ViewModelLocator(tstartup));
 

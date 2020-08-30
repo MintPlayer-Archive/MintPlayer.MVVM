@@ -4,15 +4,19 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
-
+             xmlns:conv="clr-namespace:MintPlayer.MVVM.Demo.Converters"
+             
              mc:Ignorable="d"
              d:BindingContext="{x:Static vm:ItemDetailVM}"
              x:Class="MintPlayer.MVVM.Demo.Views.ItemDetailPage"
 
-             Title="{Binding Title}">
-
+             Title="{Binding Artist.Name}">
+    <ContentPage.Resources>
+        <conv:InvertConverter x:Key="InvertConverter" />
+    </ContentPage.Resources>
     <StackLayout Spacing="20">
-        <StackLayout Padding="15">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        <StackLayout Padding="15" IsVisible="{Binding IsBusy, Converter={StaticResource InvertConverter}}">
             <Label Text="Id:" FontSize="Medium" />
             <Label Text="{Binding Artist.Id}" d:Text="Item id" FontSize="Small"/>
             <Label Text="Name:" FontSize="Medium" />
@@ -22,7 +26,7 @@
             <Label Text="Year quit:" FontSize="Medium" />
             <Label Text="{Binding Artist.YearQuit}" d:Text="Quit" FontSize="Small"/>
         </StackLayout>
-        <ListView ItemsSource="{Binding Artist.Songs}" VerticalOptions="StartAndExpand">
+        <ListView ItemsSource="{Binding Artist.Songs}" IsVisible="{Binding IsBusy, Converter={StaticResource InvertConverter}}" VerticalOptions="StartAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

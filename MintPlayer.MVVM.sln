@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo.iOS", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.iOS\MintPlayer.MVVM.Demo.iOS.csproj", "{918123EA-228F-4239-A3B0-6B03A0320502}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj", "{69ECF899-01A1-4E82-8BD4-D70F3F8F45FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MintPlayer.MVVM.Demo", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj", "{69ECF899-01A1-4E82-8BD4-D70F3F8F45FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +64,8 @@ Global
 		{28F48E0D-17CA-4166-8030-D0987F03D1DE}.Release|x86.ActiveCfg = Release|Any CPU
 		{28F48E0D-17CA-4166-8030-D0987F03D1DE}.Release|x86.Build.0 = Release|Any CPU
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|Any CPU.Build.0 = Debug|x86
+		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|ARM.ActiveCfg = Debug|ARM
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|ARM.Build.0 = Debug|ARM
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -76,6 +78,8 @@ Global
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|x86.Build.0 = Debug|x86
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Debug|x86.Deploy.0 = Debug|x86
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Release|Any CPU.ActiveCfg = Release|x86
+		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Release|Any CPU.Build.0 = Release|x86
+		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Release|Any CPU.Deploy.0 = Release|x86
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Release|ARM.ActiveCfg = Release|ARM
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Release|ARM.Build.0 = Release|ARM
 		{42883ABF-7608-44F3-8D5A-F9CCE1F0D063}.Release|ARM.Deploy.0 = Release|ARM
@@ -124,6 +128,7 @@ Global
 		{E8870E65-C557-442F-88E3-C70448A5C853}.Release|x86.Build.0 = Release|Any CPU
 		{E8870E65-C557-442F-88E3-C70448A5C853}.Release|x86.Deploy.0 = Release|Any CPU
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|Any CPU.Build.0 = Debug|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|iPhone.Build.0 = Debug|iPhone
@@ -132,6 +137,7 @@ Global
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|x64.ActiveCfg = Debug|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Debug|x86.ActiveCfg = Debug|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{918123EA-228F-4239-A3B0-6B03A0320502}.Release|Any CPU.Build.0 = Release|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Release|ARM.ActiveCfg = Release|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Release|iPhone.ActiveCfg = Release|iPhone
 		{918123EA-228F-4239-A3B0-6B03A0320502}.Release|iPhone.Build.0 = Release|iPhone
