@@ -29,7 +29,7 @@ jobs:
       run: msbuild /t:restore
     - name: Build
       #run: dotnet build --configuration Release --no-restore
-      run: msbuild MintPlayer.MVVM/MintPlayer.MVVM.csproj /p:Configuration=Release /p:RestorePackages=false
+      run: msbuild Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj /p:Configuration=Release /p:RestorePackages=false
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Pack
