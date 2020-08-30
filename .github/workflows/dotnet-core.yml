@@ -23,9 +23,10 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
     - name: Install dependencies
-      run: dotnet restore
-      env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
+      #run: dotnet restore
+      #env:
+      #  NUGET_AUTH_TOKEN: ${{ github.token }}
+      run: msbuild /t:restore
     - name: Build
       #run: dotnet build --configuration Release --no-restore
       run: msbuild MintPlayer.MVVM/MintPlayer.MVVM.csproj /p:Configuration=Release /p:RestorePackages=false
