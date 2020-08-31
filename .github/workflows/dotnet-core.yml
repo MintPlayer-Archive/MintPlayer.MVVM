@@ -14,6 +14,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1.5.0
       with:
@@ -22,6 +23,11 @@ jobs:
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
         NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
+    
+    # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.1
+    
     - name: Install dependencies
       #run: dotnet restore
       #env:
