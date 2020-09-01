@@ -24,18 +24,20 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
     
-    # Add  MsBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.1
-    
     - name: Install dependencies
-      run: msbuild /t:restore
+      run: dotnet restore
       env:
         NUGET_AUTH_TOKEN: ${{ github.token }}
     
     - name: Build
-      run: msbuild Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj /p:Configuration=Release /p:RestorePackages=false /p:OutputPath=../..
+      run: dotnet build --configuration Release --no-restore
     
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+	  
+    - name: Pack
+      run: dotnet pack --no-build --configuration Release MintPlayer.MVVM/MintPlayer.MVVM.csproj --output .
+	  
     - name: PushNuget
       run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISH_TO_NUGET_ORG }} --skip-duplicate
     - name: PushGithub
