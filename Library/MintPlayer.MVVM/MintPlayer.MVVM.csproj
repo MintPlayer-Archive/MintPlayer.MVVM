@@ -14,7 +14,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Copyright />
     <RestoreSources>$(RestoreSources);https://api.nuget.org/v3/index.json</RestoreSources>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
