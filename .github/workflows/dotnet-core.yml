@@ -36,6 +36,8 @@ jobs:
     - name: Build
       #run: dotnet build --configuration Release --no-restore
       run: msbuild Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj /t:Pack /p:Configuration=Release /p:RestorePackages=false /p:OutputPath=../..
+      # This command produces a good NuGet on my local PC:
+      # %userprofile%\source\repos\MintPlayer.MVVM\Library\MintPlayer.MVVM>msbuild /t:Pack /p:Configuration=Debug
     
     #- name: Test
     #  run: dotnet test --no-restore --verbosity normal
