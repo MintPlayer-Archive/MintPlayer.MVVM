@@ -35,9 +35,10 @@ jobs:
     
     - name: Build
       #run: dotnet build --configuration Release --no-restore
-      run: msbuild Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj /t:Pack /p:Configuration=Release /p:RestorePackages=false /p:OutputPath=../..
+      #run: msbuild Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj /t:Pack /p:Configuration=Release /p:RestorePackages=false /p:OutputPath=../..
       # This command produces a good NuGet on my local PC:
       # %userprofile%\source\repos\MintPlayer.MVVM\Library\MintPlayer.MVVM>msbuild /t:Pack /p:Configuration=Debug
+      run: msbuild /t:Pack /p:Configuration=Debug Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj
     
     #- name: Test
     #  run: dotnet test --no-restore --verbosity normal
@@ -46,8 +47,8 @@ jobs:
     #  run: dotnet pack --no-build --configuration Release MintPlayer.MVVM/MintPlayer.MVVM.csproj --output .
     
     - name: PushNuget
-      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISH_TO_NUGET_ORG }} --skip-duplicate
+      run: dotnet nuget push Library/MintPlayer.MVVM/bin/Debug/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISH_TO_NUGET_ORG }} --skip-duplicate
     - name: PushGithub
-      run: dotnet nuget push *.nupkg --no-symbols --skip-duplicate
+      run: dotnet nuget push Library/MintPlayer.MVVM/bin/Debug/*.nupkg --no-symbols --skip-duplicate
       env:
         NUGET_AUTH_TOKEN: ${{ github.token }}
