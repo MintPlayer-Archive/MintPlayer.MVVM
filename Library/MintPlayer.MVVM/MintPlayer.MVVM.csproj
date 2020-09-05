@@ -5,22 +5,22 @@
   <PropertyGroup>
     <AssemblyName>MintPlayer.MVVM</AssemblyName>
     <RootNamespace>MintPlayer.MVVM</RootNamespace>
-    <!--<TargetFrameworks>netstandard2.1;Xamarin.iOS10;MonoAndroid90;uap10.0.18362</TargetFrameworks>-->
     <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
+    <!--<TargetFrameworks>netstandard2.1;Xamarin.iOS10;MonoAndroid90;uap10.0.18362</TargetFrameworks>-->
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
-    <Authors>Pieterjan De Clippel</Authors>
     <Company>MintPlayer</Company>
+    <Authors>Pieterjan De Clippel</Authors>
+    <Version>1.0.8</Version>
+    <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageId>MintPlayer.MVVM</PackageId>
     <Product>MintPlayer.MVVM</Product>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
-    <Version>1.0.7</Version>
-    <Copyright />
-    <RestoreSources>$(RestoreSources);https://api.nuget.org/v3/index.json</RestoreSources>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM</RepositoryUrl>
     <PackageTags>Xamarin.Forms, Viewmodel navigation, Dependency Injection</PackageTags>
+    <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM</PackageProjectUrl>
     <PackageReleaseNotes>The package now contains the publish-subscription pattern</PackageReleaseNotes>
   </PropertyGroup>
 
