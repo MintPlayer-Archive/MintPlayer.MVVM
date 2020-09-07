@@ -42,7 +42,7 @@ jobs:
       run: msbuild /t:Pack /p:Configuration=Debug Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj
     
     - name: Copy
-      run: copy Library\MintPlayer.Xamarin.Alert\bin\Debug\*.nupkg .
+      run: copy Library/MintPlayer.MVVM/bin/Debug/*.nupkg .
     
     #- name: Test
     #  run: dotnet test --no-restore --verbosity normal
