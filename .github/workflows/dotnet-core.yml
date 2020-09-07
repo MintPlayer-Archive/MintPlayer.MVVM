@@ -21,8 +21,7 @@ jobs:
         dotnet-version: 3.1.301
         # Authenticates packages to push to GPR
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
-      env:
-        NUGET_AUTH_TOKEN: 'tarara'
+      #env:
       #  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       #  NUGET_AUTH_TOKEN: ${{ github.token }}
       #  #NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
