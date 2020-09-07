@@ -22,7 +22,8 @@ jobs:
         # Authenticates packages to push to GPR
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
+        NUGET_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_GITHUB_COM_2 }}
+      #  NUGET_AUTH_TOKEN: ${{ github.token }}
       #  NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       #  #NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
     
@@ -33,7 +34,8 @@ jobs:
       #run: dotnet restore
       run: msbuild /t:Restore
       env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
+        NUGET_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_GITHUB_COM_2 }}
+      #  NUGET_AUTH_TOKEN: ${{ github.token }}
     
     - name: Build
       #run: dotnet build --configuration Release --no-restore
@@ -57,4 +59,4 @@ jobs:
     - name: PushGithub
       run: dotnet nuget push *.nupkg --no-symbols --skip-duplicate
       env:
-        NUGET_AUTH_TOKEN: ${{ github.token }}
+        NUGET_AUTH_TOKEN: ${{ secrets.PUBLISH_TO_GITHUB_COM_2 }}
