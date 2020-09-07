@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Xamarin.Forms;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
-    class Event2CommandBehavior : behavior
+    public class Event2CommandBehavior : Behavior
     {
     }
 }
