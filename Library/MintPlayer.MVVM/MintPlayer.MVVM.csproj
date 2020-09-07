@@ -10,7 +10,7 @@
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM</RepositoryUrl>
@@ -51,27 +51,6 @@
     
     <AndroidResource Include="Resources\**\*.xml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
     <AndroidResource Include="Resources\**\*.axml" SubType="Designer" Generator="MSBuild:UpdateAndroidResources" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Platforms\Common\Event2CommandBehavior.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Platforms\Common\BaseModel.cs" />
-    <None Remove="Platforms\Common\BaseViewModel.cs" />
-    <None Remove="Platforms\Common\Event2CommandBehavior.cs" />
-    <None Remove="Platforms\Common\EventAggregator.cs" />
-    <None Remove="Platforms\Common\Events\AggregatorEvent.cs" />
-    <None Remove="Platforms\Common\Events\PubSubEvent.cs" />
-    <None Remove="Platforms\Common\IEvent.cs" />
-    <None Remove="Platforms\Common\IStartup.cs" />
-    <None Remove="Platforms\Common\MintPlayerMvvmExtensions.cs" />
-    <None Remove="Platforms\Common\NavigationParameters.cs" />
-    <None Remove="Platforms\Common\NavigationService.cs" />
-    <None Remove="Platforms\Common\Platform.cs" />
-    <None Remove="Platforms\Common\ViewModelAttribute.cs" />
-    <None Remove="Platforms\Common\ViewModelLocator.cs" />
   </ItemGroup>
 
   <ItemGroup>
