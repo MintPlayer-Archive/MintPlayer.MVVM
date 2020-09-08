@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MintPlayer.MVVM.Platforms.Android
+namespace MintPlayer.MVVM.Platforms.UWP
 {
     public static class Greeter
     {
