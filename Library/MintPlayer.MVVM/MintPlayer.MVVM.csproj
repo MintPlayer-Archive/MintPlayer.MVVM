@@ -3,8 +3,8 @@
   <PropertyGroup>
     <AssemblyName>MintPlayer.MVVM</AssemblyName>
     <RootNamespace>MintPlayer.MVVM</RootNamespace>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <!--<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>-->
+    <!--<TargetFramework>netstandard2.0</TargetFramework>-->
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
