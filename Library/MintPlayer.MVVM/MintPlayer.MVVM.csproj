@@ -55,7 +55,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
     <PackageReference Include="MintPlayer.Reflection.Extensions" Version="1.0.0" />
 
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
+    <!--<PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />-->
   </ItemGroup>
   
 </Project>
