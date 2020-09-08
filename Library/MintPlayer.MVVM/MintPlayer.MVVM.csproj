@@ -4,7 +4,8 @@
     <RootNamespace>MintPlayer.MVVM</RootNamespace>
     <!--<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid10.0;uap10.0.16299</TargetFrameworks>-->
     <!--<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid90;uap10.0.16299</TargetFrameworks>-->
-    <TargetFrameworks>netstandard2.1;Xamarin.iOS10;MonoAndroid10.0;uap10.0.16299</TargetFrameworks>
+    <!--<TargetFrameworks>netstandard2.1;Xamarin.iOS10;MonoAndroid10.0;uap10.0.16299</TargetFrameworks>-->
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid10.0;uap10.0.16299</TargetFrameworks>
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
