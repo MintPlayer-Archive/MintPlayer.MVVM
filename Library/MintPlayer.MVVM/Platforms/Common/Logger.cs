@@ -11,4 +11,6 @@ namespace MintPlayer.MVVM.Platforms.Common
             Console.WriteLine(text);
         }
     }
+
+    // https://github.com/MintPlayer/MintPlayer.MVVM/tree/aba6226ca3080f73ff67b359ca2077eaa54e1313
 }
