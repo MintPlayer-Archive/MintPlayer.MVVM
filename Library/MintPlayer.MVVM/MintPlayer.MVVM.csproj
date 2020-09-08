@@ -5,11 +5,11 @@
     <AssemblyName>MintPlayer.MVVM</AssemblyName>
     <RootNamespace>MintPlayer.MVVM</RootNamespace>
     <!--<TargetFramework>netstandard2.0</TargetFramework>-->
-    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid81;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid80;uap10.0.16299</TargetFrameworks>
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
-    <Version>1.2.0-preview10</Version>
+    <Version>1.2.0-preview11</Version>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM</RepositoryUrl>
@@ -58,7 +58,7 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.6" />
     <PackageReference Include="MintPlayer.Reflection.Extensions" Version="1.0.0" />
 
-    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />
+    <!--<PackageReference Include="Xamarin.Forms" Version="4.4.0.991864" />-->
   </ItemGroup>
   
 </Project>
