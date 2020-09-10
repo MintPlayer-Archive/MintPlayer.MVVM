@@ -9,7 +9,7 @@
     <_WriteTelemetryProperties>false</_WriteTelemetryProperties>
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
-    <Version>1.2.1-preview18</Version>
+    <Version>1.2.1-preview19</Version>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM/</RepositoryUrl>
