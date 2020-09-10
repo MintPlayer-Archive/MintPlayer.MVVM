@@ -35,15 +35,17 @@ jobs:
     - name: Build
       run: msbuild /t:Pack /p:Configuration=Debug Library/MintPlayer.MVVM/MintPlayer.MVVM.csproj
     
-    - name: Copy
-      run: copy Library/MintPlayer.MVVM/bin/Debug/*.nupkg .
+    #- name: Copy
+    #  run: copy Library/MintPlayer.MVVM/bin/Debug/*.nupkg .
     
     #- name: Test
     #  run: dotnet test --no-restore --verbosity normal
     
     - name: PushNuget
-      run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISH_TO_NUGET_ORG }} --skip-duplicate
+      #run: dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISH_TO_NUGET_ORG }} --skip-duplicate
+      run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.PUBLISH_TO_NUGET_ORG }} --skip-duplicate
     - name: PushGithub
-      run: dotnet nuget push *.nupkg --no-symbols --skip-duplicate
+      #run: dotnet nuget push *.nupkg --no-symbols --skip-duplicate
+      run: dotnet nuget push "**/*.nupkg" --no-symbols --skip-duplicate
       env:
         NUGET_AUTH_TOKEN: ${{ github.token }}
