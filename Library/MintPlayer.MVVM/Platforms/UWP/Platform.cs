@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MintPlayer.MVVM.Platforms.Common;
 
-namespace MintPlayer.MVVM.Platforms.UAP
+namespace MintPlayer.MVVM.Platforms.UWP
 {
     public static class Platform
     {

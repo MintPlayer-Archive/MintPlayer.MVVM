@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
+             xmlns:conv="clr-namespace:MintPlayer.MVVM.Demo.Converters"
+             
+             mc:Ignorable="d"
+             d:BindingContext="{x:Static vm:ItemDetailVM}"
+             x:Class="MintPlayer.MVVM.Demo.Views.ItemDetailPage"
+
+             Title="{Binding Artist.Name}">
+    <ContentPage.Resources>
+        <conv:InvertConverter x:Key="InvertConverter" />
+    </ContentPage.Resources>
+    <StackLayout Spacing="20">
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" WidthRequest="50" HeightRequest="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+        <StackLayout Padding="15" IsVisible="{Binding IsBusy, Converter={StaticResource InvertConverter}}">
+            <Label Text="Id:" FontSize="Medium" />
+            <Label Text="{Binding Artist.Id}" d:Text="Item id" FontSize="Small"/>
+            <Label Text="Name:" FontSize="Medium" />
+            <Label Text="{Binding Artist.Name}" d:Text="Item name" FontSize="Small"/>
+            <Label Text="Year started:" FontSize="Medium" />
+            <Label Text="{Binding Artist.YearStarted}" d:Text="Started" FontSize="Small"/>
+            <Label Text="Year quit:" FontSize="Medium" />
+            <Label Text="{Binding Artist.YearQuit}" d:Text="Quit" FontSize="Small"/>
+        </StackLayout>
+        <ListView ItemsSource="{Binding Artist.Songs}" IsVisible="{Binding IsBusy, Converter={StaticResource InvertConverter}}" VerticalOptions="StartAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Title}" 
+                                   LineBreakMode="NoWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}" 
+                                   FontSize="16"
+                                   Grid.Row="0" Grid.Column="0" />
+                            <Label Text="{Binding Released, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                                   LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                   FontSize="13"
+                                   Grid.Row="0" Grid.Column="1" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>

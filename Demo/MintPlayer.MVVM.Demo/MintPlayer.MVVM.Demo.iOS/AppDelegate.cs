@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace MintPlayer.MVVM.Demo.iOS
@@ -23,7 +19,8 @@ namespace MintPlayer.MVVM.Demo.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            Platforms.iOS.Platform.Init<App, Startup>(this);
 
             return base.FinishedLaunching(app, options);
         }

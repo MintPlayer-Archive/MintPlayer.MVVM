@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo.Androi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo.iOS", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.iOS\MintPlayer.MVVM.Demo.iOS.csproj", "{ABAB74BC-F6F1-4B96-A677-DDCD0716F306}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj", "{F6B324DD-BF59-404C-9411-66888240EE39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MintPlayer.MVVM.Demo", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj", "{F6B324DD-BF59-404C-9411-66888240EE39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +58,8 @@ Global
 		{F8279AFE-FA4D-4B98-BAA6-D04EBF2C486F}.Release|x86.ActiveCfg = Release|Any CPU
 		{F8279AFE-FA4D-4B98-BAA6-D04EBF2C486F}.Release|x86.Build.0 = Release|Any CPU
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|Any CPU.Build.0 = Debug|x86
+		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|ARM.ActiveCfg = Debug|ARM
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|ARM.Build.0 = Debug|ARM
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -118,6 +120,7 @@ Global
 		{D8492715-DD43-483A-B8BE-D5206AACC4E3}.Release|x86.Build.0 = Release|Any CPU
 		{D8492715-DD43-483A-B8BE-D5206AACC4E3}.Release|x86.Deploy.0 = Release|Any CPU
 		{ABAB74BC-F6F1-4B96-A677-DDCD0716F306}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{ABAB74BC-F6F1-4B96-A677-DDCD0716F306}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{ABAB74BC-F6F1-4B96-A677-DDCD0716F306}.Debug|ARM.ActiveCfg = Debug|iPhoneSimulator
 		{ABAB74BC-F6F1-4B96-A677-DDCD0716F306}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{ABAB74BC-F6F1-4B96-A677-DDCD0716F306}.Debug|iPhone.Build.0 = Debug|iPhone

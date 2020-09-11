@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Startup.cs" />
+    <BundleResource Include="appsettings.json" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +130,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Library\MintPlayer.MVVM\MintPlayer.MVVM.csproj">
+      <Project>{f8279afe-fa4d-4b98-baa6-d04ebf2c486f}</Project>
+      <Name>MintPlayer.MVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj">
       <Project>{79178766-E7C1-47BF-872A-CFB41DE70B5C}</Project>
       <Name>MintPlayer.MVVM.Demo</Name>
