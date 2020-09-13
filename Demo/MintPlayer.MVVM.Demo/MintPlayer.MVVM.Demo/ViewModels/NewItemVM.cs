@@ -1,4 +1,5 @@
-﻿using MintPlayer.MVVM.Demo.Events;
+﻿using MintPlayer.MVVM.Demo.Constants;
+using MintPlayer.MVVM.Demo.Events;
 using MintPlayer.MVVM.Platforms.Common;
 using MintPlayer.MVVM.Platforms.Common.Events;
 using System;
@@ -42,7 +43,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         private async void OnSave(object obj)
         {
             eventAggregator.GetEvent<ItemCreatedEvent>().Publish(Artist);
-            await navigationService.Pop(true);
+            await navigationService.Pop(RegionNames.MainRegion, true);
         }
 
         private bool CanSave(object arg)
@@ -52,7 +53,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
         private async void OnCancel(object obj)
         {
-            await navigationService.Pop(true);
+            await navigationService.Pop(RegionNames.MainRegion, true);
         }
 
         private bool CanCancel(object arg)

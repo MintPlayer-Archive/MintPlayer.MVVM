@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using MintPlayer.MVVM.Demo.Services;
 using MintPlayer.MVVM.Platforms.Common.Events;
 using MintPlayer.MVVM.Demo.Events;
+using MintPlayer.MVVM.Demo.Constants;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
@@ -68,7 +69,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
         private async void OnAddItem(object parameter)
         {
-            await navigationService.Navigate<NewItemVM>(true);
+            await navigationService.Navigate<NewItemVM>(RegionNames.MainRegion, true);
         }
 
         protected override async Task OnNavigatedTo(NavigationParameters parameters)
@@ -114,8 +115,8 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             var artist = obj as Artist;
             if (artist != null)
             {
-                //navigationService.Navigate<ItemDetailVM>((model) => { model.Artist = obj as Artist; });
-                navigationService.Navigate<ItemDetailVM>(new NavigationParameters { { "ArtistId", artist.Id } });
+                //navigationService.Navigate<ItemDetailVM>(RegionNames.MainRegion, (model) => { model.Artist = obj as Artist; });
+                navigationService.Navigate<ItemDetailVM>(RegionNames.MainRegion, new NavigationParameters { { "ArtistId", artist.Id } });
                 SelectedArtist = null;
             }
         }

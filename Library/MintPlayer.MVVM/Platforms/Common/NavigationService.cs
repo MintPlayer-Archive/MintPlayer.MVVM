@@ -3,43 +3,49 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
+using MintPlayer.MVVM.Platforms.Common.Exceptions;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
     public interface INavigationService
     {
-        Task SetMainNavigation(INavigation navigation);
-        Task SetMainPage<TViewModel>();
-        Task Navigate<TViewModel>(bool modal = false);
-        Task Navigate<TViewModel>(Action<TViewModel> data, bool modal = false);
-        Task Navigate<TViewModel>(NavigationParameters parameters, bool modal = false);
-        Task Pop(bool modal = false);
+        Task SetNavigation(string regionName, INavigation navigation);
+        Task SetMainPage<TViewModel>(string regionName);
+        Task Navigate<TViewModel>(string regionName, bool modal = false);
+        Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false);
+        Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false);
+        Task Pop(string regionName, bool modal = false);
     }
 
     internal class NavigationService : INavigationService
     {
-        private INavigation navigation;
         private readonly IViewModelLocator viewModelLocator;
         private readonly IServiceProvider serviceProvider;
+        private readonly IDictionary<string, INavigation> navigation;
         public NavigationService(IViewModelLocator viewModelLocator, IServiceProvider serviceProvider)
         {
             this.viewModelLocator = viewModelLocator;
             this.serviceProvider = serviceProvider;
+            this.navigation = new Dictionary<string, INavigation>();
         }
 
-        public Task SetMainNavigation(INavigation navigation)
+        public Task SetNavigation(string regionName, INavigation navigation)
         {
-            if (this.navigation != null)
+            if (this.navigation.ContainsKey(regionName))
                 throw new Exception("Navigation can only be set once");
 
-            this.navigation = navigation;
+            this.navigation[regionName] = navigation;
             return Task.CompletedTask;
         }
 
-        public async Task SetMainPage<TViewModel>()
+        public async Task SetMainPage<TViewModel>(string regionName)
         {
-            var page = PageFromVM<TViewModel>();
+            if (!this.navigation.ContainsKey(regionName))
+                throw new RegionNotFoundException(regionName);
 
+            var page = PageFromVM<TViewModel>();
+            var navigation = this.navigation[regionName];
             var firstPage = navigation.NavigationStack.FirstOrDefault();
             if (firstPage == null)
             {
@@ -53,9 +59,13 @@ namespace MintPlayer.MVVM.Platforms.Common
             await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
         }
 
-        public async Task Navigate<TViewModel>(bool modal = false)
+        public async Task Navigate<TViewModel>(string regionName, bool modal = false)
         {
+            if (!this.navigation.ContainsKey(regionName))
+                throw new RegionNotFoundException(regionName);
+
             var page = PageFromVM<TViewModel>();
+            var navigation = this.navigation[regionName];
             if (modal)
                 await navigation.PushModalAsync(new NavigationPage(page));
             else
@@ -64,9 +74,13 @@ namespace MintPlayer.MVVM.Platforms.Common
             await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
         }
 
-        public async Task Navigate<TViewModel>(Action<TViewModel> data, bool modal = false)
+        public async Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false)
         {
+            if (!this.navigation.ContainsKey(regionName))
+                throw new RegionNotFoundException(regionName);
+
             var page = PageFromVM<TViewModel>();
+            var navigation = this.navigation[regionName];
             data((TViewModel)page.BindingContext);
             if (modal)
                 await navigation.PushModalAsync(page);
@@ -76,9 +90,13 @@ namespace MintPlayer.MVVM.Platforms.Common
             await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
         }
 
-        public async Task Navigate<TViewModel>(NavigationParameters parameters, bool modal = false)
+        public async Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false)
         {
+            if (!this.navigation.ContainsKey(regionName))
+                throw new RegionNotFoundException(regionName);
+
             var page = PageFromVM<TViewModel>();
+            var navigation = this.navigation[regionName];
             if (modal)
                 await navigation.PushModalAsync(page);
             else
@@ -87,8 +105,12 @@ namespace MintPlayer.MVVM.Platforms.Common
             await ((BaseViewModel)page.BindingContext).OnNavigatedTo(parameters);
         }
 
-        public async Task Pop(bool modal = false)
+        public async Task Pop(string regionName, bool modal = false)
         {
+            if (!this.navigation.ContainsKey(regionName))
+                throw new RegionNotFoundException(regionName);
+
+            var navigation = this.navigation[regionName];
             if (modal)
             {
                 var page = (NavigationPage)navigation.ModalStack.LastOrDefault();

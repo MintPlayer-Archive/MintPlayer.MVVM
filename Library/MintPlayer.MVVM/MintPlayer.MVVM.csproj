@@ -53,6 +53,7 @@
 
   <ItemGroup>
     <None Remove="Platforms\Common\Behaviors\BehaviorBase.cs" />
+    <None Remove="Platforms\Common\Exceptions\RegionNotFoundException.cs" />
   </ItemGroup>
 
   <ItemGroup>
