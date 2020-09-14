@@ -9,7 +9,7 @@
     <!--<_WriteTelemetryProperties>false</_WriteTelemetryProperties>-->
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
-    <Version>1.2.2</Version>
+    <Version>1.3.0</Version>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM/</RepositoryUrl>
@@ -18,8 +18,9 @@
     <Product>MintPlayer.MVVM</Product>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageTags>Xamarin Forms, Viewmodel Navigation, Dependency Injection</PackageTags>
+    <PackageTags>Xamarin Forms, Viewmodel Navigation, Regions, Dependency Injection</PackageTags>
     <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM/</PackageProjectUrl>
+    <PackageReleaseNotes>Added regions</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
