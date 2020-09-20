@@ -21,16 +21,29 @@ namespace MintPlayer.MVVM.Platforms.Common
                 throw new Exception(message);
             }
 
-            var appSettingsXamarinFormsStream = tstartup.BaseType.Assembly.GetManifestResourceStream($"{tstartup.BaseType.Assembly.GetName().Name}.appsettings.json");
-            var appSettingsPlatformStream = tstartup.Assembly.GetManifestResourceStream($"{tstartup.Assembly.GetName().Name}.appsettings.json");
-
             // Setup configuration
             var configurationBuilder = new ConfigurationBuilder();
-            if (appSettingsXamarinFormsStream != null)
-                configurationBuilder.AddJsonStream(appSettingsXamarinFormsStream);
 
-            if (appSettingsPlatformStream != null)
-                configurationBuilder.AddJsonStream(appSettingsPlatformStream);
+            #region Add JSON configuration
+            // Xamarin.Forms appsettings
+            var appSettingsName = $"{tstartup.BaseType.Assembly.GetName().Name}.appsettings.json";
+            configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsName);
+
+            // Android appsettings
+            var appSettingsPlatformName = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith(".appsettings.json"));
+            configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformName);
+
+            //if (!string.IsNullOrEmpty(env.EnvironmentName))
+            //{
+            //    // Xamarin.Forms Environment appsettings
+            //    var appSettingsNameEnv = $"{tstartup.BaseType.Assembly.GetName().Name}.appsettings.{env.EnvironmentName}.json";
+            //    configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsNameEnv);
+
+            //    // Android Environment appsettings
+            //    var appSettingsPlatformNameEnv = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith($".appsettings.{env.EnvironmentName}.json"));
+            //    configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformNameEnv);
+            //}
+            #endregion
 
             var configuration = configurationBuilder.Build();
 
@@ -38,15 +51,24 @@ namespace MintPlayer.MVVM.Platforms.Common
             var serviceCollection = services
                 .AddSingleton<IConfiguration>(configuration)
                 .AddSingleton<INavigationService, NavigationService>()
-                .AddSingleton<IEventAggregator, EventAggregator>();
-
-            serviceCollection.AddSingleton<IViewModelLocator>(new ViewModelLocator(tstartup));
+                .AddSingleton<IEventAggregator, EventAggregator>()
+                .AddSingleton<IViewModelLocator>(new ViewModelLocator(tstartup));
 
             // Create an instance of the startup class
             var startup = (TStartup)tstartup.GetConstructor(new[] { typeof(IConfiguration) }).Invoke(new object[] { configuration });
             startup.ConfigureServices(serviceCollection);
 
             return serviceCollection;
+        }
+
+        private static void AddJsonConfiguration(this ConfigurationBuilder builder, Assembly configAssembly, string filename)
+        {
+            if (!string.IsNullOrEmpty(filename))
+            {
+                var stream = configAssembly.GetManifestResourceStream(filename);
+                if (stream != null)
+                    builder.AddJsonStream(stream);
+            }
         }
     }
 }
