@@ -15,16 +15,18 @@
         <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
         <ToolbarItem Text="Save" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Name" FontSize="Medium" />
-            <Editor Text="{Binding Artist.Name}" Keyboard="Text" d:Text="Artist name" FontSize="Small" />
-            <Label Text="Year started" FontSize="Medium" />
-            <Editor Text="{Binding Artist.YearStarted}" Keyboard="Numeric" d:Text="Year started" FontSize="Small" Margin="0" />
-            <Label Text="Year quit" FontSize="Medium" />
-            <Editor Text="{Binding Artist.YearQuit}" Keyboard="Numeric" d:Text="Year quit" FontSize="Small" Margin="0" />
-        </StackLayout>
+        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Name" FontSize="Medium" />
+                <Editor Text="{Binding Artist.Name}" Keyboard="Text" d:Text="Artist name" FontSize="Small" />
+                <Label Text="Year started" FontSize="Medium" />
+                <Editor Text="{Binding Artist.YearStarted}" Keyboard="Numeric" d:Text="Year started" FontSize="Small" Margin="0" />
+                <Label Text="Year quit" FontSize="Medium" />
+                <Editor Text="{Binding Artist.YearQuit}" Keyboard="Numeric" d:Text="Year quit" FontSize="Small" Margin="0" />
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
-    
+
 </ContentPage>
