@@ -11,6 +11,7 @@ using MintPlayer.MVVM.Demo.Services;
 using MintPlayer.MVVM.Platforms.Common.Events;
 using MintPlayer.MVVM.Demo.Events;
 using MintPlayer.MVVM.Demo.Constants;
+using Microsoft.Extensions.Configuration;
 
 namespace MintPlayer.MVVM.Demo.ViewModels
 {
@@ -19,7 +20,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
         private readonly INavigationService navigationService;
         private readonly IEventAggregator eventAggregator;
         private readonly IArtistService artistService;
-        public ItemsVM(INavigationService navigationService, IEventAggregator eventAggregator, IArtistService artistService)
+        public ItemsVM(INavigationService navigationService, IEventAggregator eventAggregator, IArtistService artistService, IConfiguration configuration)
         {
             this.navigationService = navigationService;
             this.eventAggregator = eventAggregator;
@@ -30,6 +31,8 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             LoadItemsCommand = new Command(OnLoadItems);
             AddItemCommand = new Command(OnAddItem);
             SelectArtistCommand = new Command(OnSelectArtist);
+
+            var message = configuration["message"];
 
             //MessagingCenter.Subscribe<NewItemPage, Artist>(this, "AddItem", async (obj, item) =>
             //{
