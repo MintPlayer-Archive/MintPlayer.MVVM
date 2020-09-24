@@ -37,7 +37,7 @@ namespace MintPlayer.MVVM.Platforms.Common
             configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsName);
 
             // Android appsettings
-            var appSettingsPlatformName = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith(".appsettings.json"));
+            var appSettingsPlatformName = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith(".appsettings.json"));
             configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformName);
 
             // Xamarin.Forms Environment appsettings
@@ -45,7 +45,7 @@ namespace MintPlayer.MVVM.Platforms.Common
             configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsNameEnv);
 
             // Android Environment appsettings
-            var appSettingsPlatformNameEnv = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith($".appsettings.{env}.json"));
+            var appSettingsPlatformNameEnv = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith($".appsettings.{env}.json"));
             configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformNameEnv);
 
             #endregion
