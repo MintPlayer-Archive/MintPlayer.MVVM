@@ -24,25 +24,30 @@ namespace MintPlayer.MVVM.Platforms.Common
             // Setup configuration
             var configurationBuilder = new ConfigurationBuilder();
 
+
             #region Add JSON configuration
-            // Xamarin.Forms appsettings
+
             var appSettingsName = $"{tstartup.BaseType.Assembly.GetName().Name}.appsettings.json";
+            var appSettingsXamarinFormsStream = tstartup.BaseType.Assembly.GetManifestResourceStream(appSettingsName);
+
+            // Read environment
+            var env = GetEnvironmentFromAppSettings(appSettingsXamarinFormsStream);
+
+            // Xamarin.Forms appsettings
             configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsName);
 
             // Android appsettings
             var appSettingsPlatformName = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith(".appsettings.json"));
             configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformName);
 
-            //if (!string.IsNullOrEmpty(env.EnvironmentName))
-            //{
-            //    // Xamarin.Forms Environment appsettings
-            //    var appSettingsNameEnv = $"{tstartup.BaseType.Assembly.GetName().Name}.appsettings.{env.EnvironmentName}.json";
-            //    configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsNameEnv);
+            // Xamarin.Forms Environment appsettings
+            var appSettingsNameEnv = $"{tstartup.BaseType.Assembly.GetName().Name}.appsettings.{env}.json";
+            configurationBuilder.AddJsonConfiguration(tstartup.BaseType.Assembly, appSettingsNameEnv);
 
-            //    // Android Environment appsettings
-            //    var appSettingsPlatformNameEnv = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith($".appsettings.{env.EnvironmentName}.json"));
-            //    configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformNameEnv);
-            //}
+            // Android Environment appsettings
+            var appSettingsPlatformNameEnv = tstartup.Assembly.GetManifestResourceNames().FirstOrDefault(n => n.ToLower().EndsWith($".appsettings.{env}.json"));
+            configurationBuilder.AddJsonConfiguration(tstartup.Assembly, appSettingsPlatformNameEnv);
+
             #endregion
 
             var configuration = configurationBuilder.Build();
@@ -69,6 +74,20 @@ namespace MintPlayer.MVVM.Platforms.Common
                 if (stream != null)
                     builder.AddJsonStream(stream);
             }
+        }
+
+        private static string GetEnvironmentFromAppSettings(System.IO.Stream appSettingsXamarinFormsStream)
+        {
+            if (appSettingsXamarinFormsStream != null)
+            {
+                var appSettingsReader = System.Text.Json.JsonDocument.Parse(appSettingsXamarinFormsStream);
+                if (appSettingsReader.RootElement.TryGetProperty("environment", out var jsonElement))
+                {
+                    return jsonElement.GetString();
+                }
+                appSettingsXamarinFormsStream.Seek(0, System.IO.SeekOrigin.Begin);
+            }
+            return "Production";
         }
     }
 }
