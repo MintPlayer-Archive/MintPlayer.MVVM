@@ -53,9 +53,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Platforms\Common\BackPressedEventArgs.cs" />
     <None Remove="Platforms\Common\Behaviors\BehaviorBase.cs" />
     <None Remove="Platforms\Common\Converters\SelectedItemConverter.cs" />
     <None Remove="Platforms\Common\Exceptions\RegionNotFoundException.cs" />
+    <None Remove="Platforms\Common\MintPlayerMvvmConfiguration.cs" />
   </ItemGroup>
 
   <ItemGroup>

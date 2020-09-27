@@ -2,7 +2,7 @@
 using MintPlayer.MVVM.Demo.Events;
 using MintPlayer.MVVM.Demo.Models;
 using MintPlayer.MVVM.Platforms.Common;
-using MintPlayer.MVVM.Platforms.Common.Events;
+using MintPlayer.MVVM.Platforms.Common.EventAggregator;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;

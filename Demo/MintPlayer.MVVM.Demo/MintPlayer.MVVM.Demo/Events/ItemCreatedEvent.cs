@@ -1,4 +1,4 @@
-﻿using MintPlayer.MVVM.Platforms.Common.Events;
+﻿using MintPlayer.MVVM.Platforms.Common.EventAggregator;
 
 namespace MintPlayer.MVVM.Demo.Events
 {

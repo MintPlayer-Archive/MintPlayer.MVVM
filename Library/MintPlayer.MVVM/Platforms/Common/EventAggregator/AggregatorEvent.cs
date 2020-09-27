@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MintPlayer.MVVM.Platforms.Common.Events
+namespace MintPlayer.MVVM.Platforms.Common.EventAggregator
 {
     public interface IAggregatorEvent
     {

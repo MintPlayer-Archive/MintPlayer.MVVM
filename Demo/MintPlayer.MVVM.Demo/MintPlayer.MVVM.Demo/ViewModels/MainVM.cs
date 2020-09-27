@@ -1,5 +1,5 @@
 ﻿using MintPlayer.MVVM.Demo.Events;
-using MintPlayer.MVVM.Platforms.Common.Events;
+using MintPlayer.MVVM.Platforms.Common.EventAggregator;
 using System;
 using System.Collections.Generic;
 using System.Text;

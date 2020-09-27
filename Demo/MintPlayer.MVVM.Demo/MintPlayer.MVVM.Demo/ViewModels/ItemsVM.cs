@@ -8,7 +8,7 @@ using System.Windows.Input;
 using MintPlayer.MVVM.Platforms.Common;
 using System.Threading.Tasks;
 using MintPlayer.MVVM.Demo.Services;
-using MintPlayer.MVVM.Platforms.Common.Events;
+using MintPlayer.MVVM.Platforms.Common.EventAggregator;
 using MintPlayer.MVVM.Demo.Events;
 using MintPlayer.MVVM.Demo.Constants;
 using Microsoft.Extensions.Configuration;
@@ -131,6 +131,13 @@ namespace MintPlayer.MVVM.Demo.ViewModels
                 Artists.Add(artist);
             }
         }
+
+        public override Task OnBackPressed(BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            return Task.CompletedTask;
+        }
+
         #endregion
     }
 }

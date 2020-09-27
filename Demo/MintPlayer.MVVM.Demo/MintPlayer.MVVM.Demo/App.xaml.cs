@@ -24,9 +24,9 @@ namespace MintPlayer.MVVM.Demo
                 BindingContext = ActivatorUtilities.CreateInstance<MainVM>(serviceProvider)
             };
 
-            navigationService.SetNavigation(RegionNames.MainRegion, ((MasterDetailPage)MainPage).Detail.Navigation);
+            navigationService.SetNavigation(RegionNames.MainRegion, (NavigationPage)((MasterDetailPage)MainPage).Detail, true);
             navigationService.SetMainPage<ItemsVM>(RegionNames.MainRegion);
-            navigationService.SetNavigation(RegionNames.MenuRegion, ((MasterDetailPage)MainPage).Master.Navigation);
+            navigationService.SetNavigation(RegionNames.MenuRegion, (NavigationPage)((MasterDetailPage)MainPage).Master);
             navigationService.SetMainPage<MenuVM>(RegionNames.MenuRegion);
         }
 

@@ -13,5 +13,10 @@ namespace MintPlayer.MVVM.Platforms.Common
         {
             return Task.CompletedTask;
         }
+
+        public virtual Task OnBackPressed(BackPressedEventArgs e)
+        {
+            return Task.CompletedTask;
+        }
     }
 }
