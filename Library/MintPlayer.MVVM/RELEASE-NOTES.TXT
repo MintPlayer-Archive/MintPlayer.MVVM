@@ -1,5 +1,8 @@
-﻿v.1.4.0
-- Added regions
-
-v1.5.0
-- Moved the SetProperty method to BaseModel
+﻿<h3>v.1.4.0</h3>
+<ul>
+	<li>Added regions</li>
+</ul>
+<h3>v1.5.0</h3>
+<ul>
+	<li>Moved the SetProperty method to BaseModel</li>
+</ul>
