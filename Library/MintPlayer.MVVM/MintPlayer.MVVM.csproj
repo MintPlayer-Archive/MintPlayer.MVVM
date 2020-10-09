@@ -9,7 +9,7 @@
     <!--<_WriteTelemetryProperties>false</_WriteTelemetryProperties>-->
     <Company>MintPlayer</Company>
     <Authors>Pieterjan De Clippel</Authors>
-    <Version>1.5.0</Version>
+    <Version>1.5.1</Version>
     <Description>This package allows you to implement ViewModel Navigation and Dependency Injection in a Xamarin.Forms project</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM/</RepositoryUrl>
@@ -20,12 +20,18 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageTags>Xamarin Forms, Viewmodel Navigation, Regions, Dependency Injection</PackageTags>
     <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM/</PackageProjectUrl>
-    <PackageReleaseNotes>
-      1.4.0. Added regions
-      1.5.0. Moved the SetProperty method to BaseModel
-    </PackageReleaseNotes>
+    <PackageReleaseNotes>(Please write the package release notes in "RELEASE NOTES.txt")</PackageReleaseNotes>
   </PropertyGroup>
 
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="./RELEASE-NOTES.txt">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+  
   <ItemGroup>
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />

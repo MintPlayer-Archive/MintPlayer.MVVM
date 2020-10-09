@@ -1,0 +1,5 @@
+﻿v.1.4.0
+- Added regions
+
+v1.5.0
+- Moved the SetProperty method to BaseModel
