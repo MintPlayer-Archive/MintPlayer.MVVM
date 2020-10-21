@@ -12,6 +12,7 @@ namespace MintPlayer.MVVM.Platforms.iOS
             var services = new ServiceCollection()
                 .AddMintPlayerMvvm<TStartup>()
                 .AddSingleton<TApp>()
+                .Configure<Common.Options.PlatformOptions>(options => options.Platform = Common.Enums.ePlatform.iOS)
                 .BuildServiceProvider();
             var xf_app = services.GetService<TApp>();
 

@@ -3,3 +3,6 @@
 
 v1.5.0
 - Moved the SetProperty method to BaseModel
+
+v1.6.0
+- Added platform options to determine platform through IOptions<PlatformOptions>

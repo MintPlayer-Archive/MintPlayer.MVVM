@@ -12,6 +12,7 @@ namespace MintPlayer.MVVM.Platforms.Android
             var services = new ServiceCollection()
                 .AddMintPlayerMvvm<TStartup>()
                 .AddSingleton<TApp>()
+                .Configure<Common.Options.PlatformOptions>(options => options.Platform = Common.Enums.ePlatform.Android)
                 .BuildServiceProvider();
             var xf_app = services.GetService<TApp>();
 
