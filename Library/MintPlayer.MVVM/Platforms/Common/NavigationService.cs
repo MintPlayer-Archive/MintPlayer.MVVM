@@ -12,9 +12,9 @@ namespace MintPlayer.MVVM.Platforms.Common
     {
         Task SetNavigation(string regionName, INavigation navigation);
         Task SetMainPage<TViewModel>(string regionName);
-        Task Navigate<TViewModel>(string regionName, bool modal = false);
-        Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false);
-        Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false);
+        Task Navigate<TViewModel>(string regionName, bool modal = false) where TViewModel : BaseViewModel;
+        Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false) where TViewModel : BaseViewModel;
+        Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false) where TViewModel : BaseViewModel;
         Task Pop(string regionName, bool modal = false);
     }
 
@@ -59,50 +59,37 @@ namespace MintPlayer.MVVM.Platforms.Common
             await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
         }
 
-        public async Task Navigate<TViewModel>(string regionName, bool modal = false)
+        private async Task InternalNavigate<TViewModel>(string regionName, NavigationParameters parameters, Action<TViewModel> data, bool modal) where TViewModel : BaseViewModel
         {
-            if (!this.navigation.ContainsKey(regionName))
+            if (!navigation.ContainsKey(regionName))
                 throw new RegionNotFoundException(regionName);
 
             var page = PageFromVM<TViewModel>();
-            var navigation = this.navigation[regionName];
-            if (modal)
-                await navigation.PushModalAsync(new NavigationPage(page));
-            else
-                await navigation.PushAsync(page);
+            var viewModel = (TViewModel)page.BindingContext;
+            viewModel.IsModal = modal;
+            data(viewModel);
 
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
+            if (modal)
+                await navigation[regionName].PushModalAsync(new NavigationPage(page));
+            else
+                await navigation[regionName].PushAsync(page);
+
+            await viewModel.OnNavigatedTo(parameters);
         }
 
-        public async Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false)
+        public async Task Navigate<TViewModel>(string regionName, bool modal = false) where TViewModel : BaseViewModel
         {
-            if (!this.navigation.ContainsKey(regionName))
-                throw new RegionNotFoundException(regionName);
-
-            var page = PageFromVM<TViewModel>();
-            var navigation = this.navigation[regionName];
-            data((TViewModel)page.BindingContext);
-            if (modal)
-                await navigation.PushModalAsync(page);
-            else
-                await navigation.PushAsync(page);
-
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
+            await InternalNavigate<TViewModel>(regionName, null, null, modal);
         }
 
-        public async Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false)
+        public async Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false) where TViewModel : BaseViewModel
         {
-            if (!this.navigation.ContainsKey(regionName))
-                throw new RegionNotFoundException(regionName);
+            await InternalNavigate<TViewModel>(regionName, null, data, modal);
+        }
 
-            var page = PageFromVM<TViewModel>();
-            var navigation = this.navigation[regionName];
-            if (modal)
-                await navigation.PushModalAsync(page);
-            else
-                await navigation.PushAsync(page);
-
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(parameters);
+        public async Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false) where TViewModel : BaseViewModel
+        {
+            await InternalNavigate<TViewModel>(regionName, parameters, null, modal);
         }
 
         public async Task Pop(string regionName, bool modal = false)

@@ -13,5 +13,7 @@ namespace MintPlayer.MVVM.Platforms.Common
         {
             return Task.CompletedTask;
         }
+
+        public bool IsModal { get; internal set; }
     }
 }
