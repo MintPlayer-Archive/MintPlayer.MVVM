@@ -9,3 +9,6 @@ v1.6.0
 
 v1.7.0
 - Added IsModal property to ViewModels
+
+v1.7.2
+- Added Title property to ViewModels
