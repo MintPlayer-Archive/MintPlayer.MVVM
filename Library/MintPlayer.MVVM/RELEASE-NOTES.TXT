@@ -6,3 +6,6 @@ v1.5.0
 
 v1.6.0
 - Added platform options to determine platform through IOptions<PlatformOptions>
+
+v1.7.0
+- Added IsModal property to ViewModels

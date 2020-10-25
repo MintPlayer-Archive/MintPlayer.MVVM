@@ -67,7 +67,7 @@ namespace MintPlayer.MVVM.Platforms.Common
             var page = PageFromVM<TViewModel>();
             var viewModel = (TViewModel)page.BindingContext;
             viewModel.IsModal = modal;
-            data(viewModel);
+            if (data != null) data(viewModel);
 
             if (modal)
                 await navigation[regionName].PushModalAsync(new NavigationPage(page));
