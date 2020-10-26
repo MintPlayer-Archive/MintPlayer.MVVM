@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Pieterjan De Clippel</Authors>
+    <Company>MintPlayer</Company>
+    <Description>This package only contains a BaseModel class with a PropertyChanged event and SetProperty method</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/MintPlayer/MintPlayer.MVVM/</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageId>MintPlayer.MVVM.BaseModel</PackageId>
+    <Product>MintPlayer.MVVM.BaseModel</Product>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageTags>BaseModel, PropertyChanged</PackageTags>
+    <PackageProjectUrl>https://github.com/MintPlayer/MintPlayer.MVVM/Library/MintPlayer.MVVM.Core</PackageProjectUrl>
+    <PackageReleaseNotes>(Please write the package release notes in "RELEASE NOTES.txt")</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="./RELEASE-NOTES.txt">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
+</Project>
