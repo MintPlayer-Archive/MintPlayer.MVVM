@@ -1,7 +1,5 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using MintPlayer.MVVM.Demo.Services;
 using MintPlayer.MVVM.Demo.Views;
 using MintPlayer.MVVM.Platforms.Common;
 using MintPlayer.MVVM.Demo.ViewModels;
@@ -19,15 +17,28 @@ namespace MintPlayer.MVVM.Demo
             this.navigationService = navigationService;
             this.serviceProvider = serviceProvider;
             InitializeComponent();
-            MainPage = new MainPage
+            var mainPage = new MainPage
             {
                 BindingContext = ActivatorUtilities.CreateInstance<MainVM>(serviceProvider)
             };
-
-            navigationService.SetNavigation(RegionNames.MainRegion, ((MasterDetailPage)MainPage).Detail.Navigation);
-            navigationService.SetMainPage<ItemsVM>(RegionNames.MainRegion);
-            navigationService.SetNavigation(RegionNames.MenuRegion, ((MasterDetailPage)MainPage).Master.Navigation);
-            navigationService.SetMainPage<MenuVM>(RegionNames.MenuRegion);
+            MainPage = mainPage;
+            navigationService.SetNavigation(
+                RegionNames.MainRegion,
+                mainPage.Detail.Navigation,
+                new Platforms.Common.Options.NavigationOptions
+                {
+                    MainViewModel = typeof(ItemsVM)
+                }
+            );
+            navigationService.SetNavigation(
+                RegionNames.MenuRegion,
+                mainPage.Master.Navigation,
+                new Platforms.Common.Options.NavigationOptions
+                {
+                    MainViewModel = typeof(MenuVM),
+                    HasNavigationBar = false
+                }
+            );
         }
 
         protected override void OnStart()

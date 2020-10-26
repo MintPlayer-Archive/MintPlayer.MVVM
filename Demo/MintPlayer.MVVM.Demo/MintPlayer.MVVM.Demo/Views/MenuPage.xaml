@@ -12,7 +12,8 @@
              Title="Menu">
              
     <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="ListViewMenu" ItemsSource="{Binding MenuItems}" HasUnevenRows="True">
+        <StackLayout Margin="0,0,0,-6" HeightRequest="150" BackgroundColor="{StaticResource NavigationPrimary}" HorizontalOptions="FillAndExpand" VerticalOptions="Start" />
+        <ListView x:Name="ListViewMenu" ItemsSource="{Binding MenuItems}" HasUnevenRows="True" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
