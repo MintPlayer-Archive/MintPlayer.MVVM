@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using MintPlayer.MVVM.Core;
+using System.Threading.Tasks;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {

@@ -70,6 +70,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.8" />
+    <PackageReference Include="MintPlayer.MVVM.BaseModel" Version="1.0.0" />
     <PackageReference Include="MintPlayer.Reflection.Extensions" Version="1.0.1" />
 
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1534" />

@@ -1,2 +1,5 @@
 ﻿v.1.0.0
 - Created BaseModel
+
+v1.0.1
+- Moved BaseModel to namespace MintPlayer.MVVM.BaseModel

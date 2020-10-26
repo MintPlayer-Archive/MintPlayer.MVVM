@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MintPlayer.MVVM.Core
+namespace MintPlayer.MVVM.BaseModel
 {
     public abstract class BaseModel : INotifyPropertyChanged
     {
