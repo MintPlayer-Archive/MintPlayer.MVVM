@@ -1,9 +1,8 @@
-﻿using MintPlayer.MVVM.Core;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace MintPlayer.MVVM.Platforms.Common
 {
-    public abstract class BaseViewModel : BaseModel
+    public abstract class BaseViewModel : BaseModel.BaseModel
     {
         protected internal virtual Task OnNavigatedTo(NavigationParameters parameters)
         {
