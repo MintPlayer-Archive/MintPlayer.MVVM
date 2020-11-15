@@ -133,7 +133,7 @@ namespace MintPlayer.MVVM.Platforms.Common
         private Page PageFromVM<TViewModel>()
         {
             var viewType = viewModelLocator.Resolve<TViewModel>();
-            var view = (Page)Activator.CreateInstance(viewType);
+            var view = (Page)ActivatorUtilities.CreateInstance(serviceProvider, viewType);
             view.BindingContext = ActivatorUtilities.CreateInstance<TViewModel>(serviceProvider);
             return view;
         }

@@ -12,3 +12,6 @@ v1.7.0
 
 v1.7.2
 - Added Title property to ViewModels
+
+v1.10.1
+- Create Page through service container

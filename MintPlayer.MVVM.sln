@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.Demo.iOS", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MintPlayer.MVVM.Demo", "Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo\MintPlayer.MVVM.Demo.csproj", "{F6B324DD-BF59-404C-9411-66888240EE39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MintPlayer.MVVM.BaseModel", "Library\MintPlayer.MVVM.BaseModel\MintPlayer.MVVM.BaseModel.csproj", "{75B5AF79-AD29-453F-BE8D-35C949216042}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MintPlayer.MVVM.BaseModel", "Library\MintPlayer.MVVM.BaseModel\MintPlayer.MVVM.BaseModel.csproj", "{75B5AF79-AD29-453F-BE8D-35C949216042}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +67,8 @@ Global
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|ARM.Deploy.0 = Debug|ARM
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|iPhone.ActiveCfg = Debug|x86
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
+		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|iPhoneSimulator.Build.0 = Debug|x86
+		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|iPhoneSimulator.Deploy.0 = Debug|x86
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|x64.ActiveCfg = Debug|x64
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|x64.Build.0 = Debug|x64
 		{68A1B9AF-BA1E-4585-926E-97FC25F73C23}.Debug|x64.Deploy.0 = Debug|x64
