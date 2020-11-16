@@ -75,6 +75,19 @@ namespace MintPlayer.MVVM.Platforms.Common
             // NavigationPage options
             NavigationPage.SetHasBackButton(mainPage, navOptions.HasBackButton);
             NavigationPage.SetHasNavigationBar(mainPage, navOptions.HasNavigationBar);
+
+            var navType = navigation.GetType();
+            if (navType.Name == "NavigationImpl")
+            {
+                var ownerProperty = navType.GetProperty("Owner", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                var navigationPage = (NavigationPage)ownerProperty.GetValue(navigation);
+                navigationPage.Pushed += (sender, e) =>
+                {
+                };
+                navigationPage.Popped += (sender, e) =>
+                {
+                };
+            }
         }
 
         private async Task InternalNavigate<TViewModel>(string regionName, NavigationParameters parameters, Action<TViewModel> data, bool modal) where TViewModel : BaseViewModel
