@@ -15,3 +15,8 @@ v1.7.2
 
 v1.10.1
 - Create Page through service container
+
+v1.11.0
+- Added Appearing/Disappearing hooks
+- Removed regionname-exists check in SetNavigation
+- Added ClearNavigation method

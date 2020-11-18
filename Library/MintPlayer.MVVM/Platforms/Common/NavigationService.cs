@@ -12,7 +12,8 @@ namespace MintPlayer.MVVM.Platforms.Common
     public interface INavigationService
     {
         Task SetNavigation(string regionName, INavigation navigation, NavigationOptions navOptions);
-        Task<Page> SetMainPage<TViewModel>(string regionName);
+        Task ClearNavigation(string regionName);
+        Task<Page> SetMainPage<TViewModel>(string regionName) where TViewModel : BaseViewModel;
         Task Navigate<TViewModel>(string regionName, bool modal = false) where TViewModel : BaseViewModel;
         Task Navigate<TViewModel>(string regionName, Action<TViewModel> data, bool modal = false) where TViewModel : BaseViewModel;
         Task Navigate<TViewModel>(string regionName, NavigationParameters parameters, bool modal = false) where TViewModel : BaseViewModel;
@@ -31,7 +32,7 @@ namespace MintPlayer.MVVM.Platforms.Common
             this.navigation = new Dictionary<string, INavigation>();
         }
 
-        public async Task<Page> SetMainPage<TViewModel>(string regionName)
+        public async Task<Page> SetMainPage<TViewModel>(string regionName) where TViewModel : BaseViewModel
         {
             // Region name must exist.
             if (!this.navigation.ContainsKey(regionName))
@@ -39,10 +40,13 @@ namespace MintPlayer.MVVM.Platforms.Common
 
             // Create page from the viewmodel.
             var page = PageFromVM<TViewModel>();
+            var viewModel = (TViewModel)page.BindingContext;
             var navigation = this.navigation[regionName];
 
             // If necessary, remove all pages in order to set the mainpage as only page on this stack.
+            await OnWireEvents(page);
             var firstPage = navigation.NavigationStack.FirstOrDefault();
+            viewModel.isPushing = true;
             if (firstPage == null)
             {
                 await navigation.PushAsync(page);
@@ -52,17 +56,17 @@ namespace MintPlayer.MVVM.Platforms.Common
                 navigation.InsertPageBefore(page, firstPage);
                 await navigation.PopToRootAsync();
             }
+            viewModel.isPushing = false;
 
-            // Invoke the OnNavigatedTo hook.
-            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(null);
+            await OnBindingContextNavigatedTo(page, null);
 
             return page;
         }
 
         public async Task SetNavigation(string regionName, INavigation navigation, NavigationOptions navOptions)
         {
-            if (this.navigation.ContainsKey(regionName))
-                throw new Exception("Navigation can only be set once");
+            //if (this.navigation.ContainsKey(regionName))
+            //    throw new Exception("Navigation can only be set once");
 
             // Keep navigation stack in dictionary
             this.navigation[regionName] = navigation;
@@ -75,20 +79,66 @@ namespace MintPlayer.MVVM.Platforms.Common
             // NavigationPage options
             NavigationPage.SetHasBackButton(mainPage, navOptions.HasBackButton);
             NavigationPage.SetHasNavigationBar(mainPage, navOptions.HasNavigationBar);
+        }
 
-            var navType = navigation.GetType();
-            if (navType.Name == "NavigationImpl")
+        public Task ClearNavigation(string regionName)
+        {
+            if (navigation.ContainsKey(regionName))
             {
-                var ownerProperty = navType.GetProperty("Owner", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                var navigationPage = (NavigationPage)ownerProperty.GetValue(navigation);
-                navigationPage.Pushed += (sender, e) =>
-                {
-                };
-                navigationPage.Popped += (sender, e) =>
-                {
-                };
+                navigation.Remove(regionName);
+            }
+            return Task.CompletedTask;
+        }
+
+        #region Appearing/Disappearing
+        private async Task OnBindingContextNavigatedTo(Page page, NavigationParameters parameters)
+        {
+            // Invoke the OnNavigatedTo hook.
+            await ((BaseViewModel)page.BindingContext).OnNavigatedTo(parameters);
+        }
+
+        private Task OnWireEvents(Page page)
+        {
+            // Wire the Appearing/Disappearing events
+            page.Appearing += Page_Appearing;
+            page.Disappearing += Page_Disappearing;
+
+            return Task.CompletedTask;
+        }
+
+        private async Task OnBindingContextNavigatedFrom(Page page)
+        {
+            var bindingContext = (BaseViewModel)page.BindingContext;
+            await bindingContext.OnNavigatedFrom();
+        }
+
+        private Task OnUnwireEvents(Page page)
+        {
+            // Unwire the Appearing/Disappearing events
+            page.Appearing -= Page_Appearing;
+            page.Disappearing -= Page_Disappearing;
+
+            return Task.CompletedTask;
+        }
+
+        private void Page_Appearing(object sender, EventArgs e)
+        {
+            if (sender is Page page)
+            {
+                var bindingContext = (BaseViewModel)page.BindingContext;
+                bindingContext.OnAppearing(bindingContext.isPushing);
             }
         }
+
+        private void Page_Disappearing(object sender, EventArgs e)
+        {
+            if (sender is Page page)
+            {
+                var bindingContext = (BaseViewModel)page.BindingContext;
+                bindingContext.OnDisappearing(bindingContext.isPopping);
+            }
+        }
+        #endregion
 
         private async Task InternalNavigate<TViewModel>(string regionName, NavigationParameters parameters, Action<TViewModel> data, bool modal) where TViewModel : BaseViewModel
         {
@@ -100,12 +150,16 @@ namespace MintPlayer.MVVM.Platforms.Common
             viewModel.IsModal = modal;
             if (data != null) data(viewModel);
 
+            await OnWireEvents(page);
+
+            viewModel.isPushing = true;
             if (modal)
                 await navigation[regionName].PushModalAsync(new NavigationPage(page));
             else
                 await navigation[regionName].PushAsync(page);
+            viewModel.isPushing = false;
 
-            await viewModel.OnNavigatedTo(parameters);
+            await OnBindingContextNavigatedTo(page, parameters);
         }
 
         public async Task Navigate<TViewModel>(string regionName, bool modal = false) where TViewModel : BaseViewModel
@@ -132,14 +186,22 @@ namespace MintPlayer.MVVM.Platforms.Common
             if (modal)
             {
                 var page = (NavigationPage)navigation.ModalStack.LastOrDefault();
+                var viewModel = (BaseViewModel)page.BindingContext;
+                viewModel.isPopping = true;
                 await navigation.PopModalAsync();
-                await ((BaseViewModel)page.RootPage.BindingContext).OnNavigatedFrom();
+                viewModel.isPopping = false;
+                await OnBindingContextNavigatedFrom(page);
+                await OnUnwireEvents(page);
             }
             else
             {
                 var page = navigation.NavigationStack.LastOrDefault();
+                var viewModel = (BaseViewModel)page.BindingContext;
+                viewModel.isPopping = true;
                 await navigation.PopAsync();
-                await ((BaseViewModel)page.BindingContext).OnNavigatedFrom();
+                viewModel.isPopping = false;
+                await OnBindingContextNavigatedFrom(page);
+                await OnUnwireEvents(page);
             }
         }
 
