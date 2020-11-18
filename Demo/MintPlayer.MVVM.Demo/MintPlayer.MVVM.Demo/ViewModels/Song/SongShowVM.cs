@@ -1,37 +1,16 @@
-﻿using MintPlayer.MVVM.Demo.Events;
-using MintPlayer.MVVM.Platforms.Common;
-using MintPlayer.MVVM.Platforms.Common.Events;
+﻿using MintPlayer.MVVM.Platforms.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MintPlayer.MVVM.Demo.ViewModels
+namespace MintPlayer.MVVM.Demo.ViewModels.Song
 {
-    public class MainVM : BaseVM
+    public class SongShowVM : BaseVM
     {
-        private readonly IEventAggregator eventAggregator;
-        public MainVM(IEventAggregator eventAggregator)
+        public SongShowVM()
         {
-            this.eventAggregator = eventAggregator;
-            eventAggregator.GetEvent<MenuItemSelectedEvent>().Subscribe(OnMenuItemSelected);
-        }
 
-        #region Bindings
-        #region SidebarVisible
-        private bool isSidebarVisible;
-        public bool IsSidebarVisible
-        {
-            get => isSidebarVisible;
-            set => SetProperty(ref isSidebarVisible, value);
-        }
-        #endregion
-        #endregion
-
-        #region Methods
-        private void OnMenuItemSelected(object obj)
-        {
-            IsSidebarVisible = false;
         }
 
         protected override Task OnNavigatedTo(NavigationParameters parameters)
@@ -57,6 +36,5 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             System.Diagnostics.Debug.WriteLine($"{GetType().Name} disappearing ({popped})");
             return Task.CompletedTask;
         }
-        #endregion
     }
 }

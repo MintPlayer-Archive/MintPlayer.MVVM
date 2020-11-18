@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:MintPlayer.MVVM.Demo.ViewModels"
              xmlns:conv="clr-namespace:MintPlayer.MVVM.Demo.Converters"
+             xmlns:behav="clr-namespace:MintPlayer.MVVM.Platforms.Common.Behaviors;assembly=MintPlayer.MVVM"
              
              mc:Ignorable="d"
              d:BindingContext="{x:Static vm:ItemDetailVM}"
@@ -12,6 +13,7 @@
 
              Title="{Binding Artist.Name}">
     <ContentPage.Resources>
+        <conv:TappedItemEventArgsToSelectedItemConverter x:Key="TappedItemConverter" />
         <conv:InvertConverter x:Key="InvertConverter" />
     </ContentPage.Resources>
     <StackLayout Spacing="20">
@@ -49,6 +51,9 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <behav:Event2CommandBehavior EventName="ItemTapped" Command="{Binding SelectSongCommand}" Converter="{StaticResource TappedItemConverter}" />
+            </ListView.Behaviors>
         </ListView>
     </StackLayout>
     

@@ -56,7 +56,11 @@ namespace MintPlayer.MVVM.Platforms.Common
                 navigation.InsertPageBefore(page, firstPage);
                 await navigation.PopToRootAsync();
             }
-            viewModel.isPushing = false;
+            Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                viewModel.isPushing = false;
+            });
 
             await OnBindingContextNavigatedTo(page, null);
 
@@ -157,7 +161,11 @@ namespace MintPlayer.MVVM.Platforms.Common
                 await navigation[regionName].PushModalAsync(new NavigationPage(page));
             else
                 await navigation[regionName].PushAsync(page);
-            viewModel.isPushing = false;
+            Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                viewModel.isPushing = false;
+            });
 
             await OnBindingContextNavigatedTo(page, parameters);
         }

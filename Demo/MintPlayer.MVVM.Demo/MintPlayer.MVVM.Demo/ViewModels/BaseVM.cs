@@ -13,12 +13,5 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             get => isBusy;
             set => SetProperty(ref isBusy, value);
         }
-
-        string title = string.Empty;
-        public string Title
-        {
-            get => title;
-            set => SetProperty(ref title, value);
-        }
     }
 }

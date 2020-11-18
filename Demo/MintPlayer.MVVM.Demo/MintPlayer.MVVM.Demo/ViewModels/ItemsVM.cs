@@ -77,6 +77,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
         protected override async Task OnNavigatedTo(NavigationParameters parameters)
         {
+            System.Diagnostics.Debug.WriteLine($"Navigated to {GetType().Name}");
             eventAggregator.GetEvent<ItemCreatedEvent>().Subscribe(OnItemCreated);
             if (Artists.Count == 0)
             {
@@ -86,6 +87,7 @@ namespace MintPlayer.MVVM.Demo.ViewModels
 
         protected override Task OnNavigatedFrom()
         {
+            System.Diagnostics.Debug.WriteLine($"Navigated from {GetType().Name}");
             eventAggregator.GetEvent<ItemCreatedEvent>().Unsubscribe(OnItemCreated);
             return Task.CompletedTask;
         }
@@ -130,6 +132,18 @@ namespace MintPlayer.MVVM.Demo.ViewModels
             {
                 Artists.Add(artist);
             }
+        }
+
+        protected override Task OnAppearing(bool pushed)
+        {
+            System.Diagnostics.Debug.WriteLine($"{GetType().Name} appearing ({pushed})");
+            return Task.CompletedTask;
+        }
+
+        protected override Task OnDisappearing(bool popped)
+        {
+            System.Diagnostics.Debug.WriteLine($"{GetType().Name} disappearing ({popped})");
+            return Task.CompletedTask;
         }
         #endregion
     }
